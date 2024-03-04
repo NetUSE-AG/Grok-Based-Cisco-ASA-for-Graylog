@@ -45,7 +45,7 @@ Congratulations, you changed the fieldmapping of those field from the json!
 
 ### Maintainance
 Now you changed your filed mapping - you might run into errors in your indexing. If your Graylog tries to write "ssh" in the field destination_port it will run into an integer - and fail. You can see this on the "/system/overview" page in your Graylog. Hopefully your Overview will always look like this:
-! [Indexing](Images/Indexing_Error.png)
+![Indexing](Images/Indexing_Error.png)
 If not, you will we an error like this:
 ```
 ElasticsearchException[Elasticsearch exception [type=mapper_parsing_exception, reason=failed to parse field [fsize] of type [long] in document with id 's0me-rand0m-iD-from-Graylog'. Preview of field's value: '18302908161605107712']]; nested: ElasticsearchException[Elasticsearch exception [type=input_coercion_exception, reason=Numeric value (18302908161605107712) out of range of long (-9223372036854775808 - 9223372036854775807) at [Source: (byte[])"{"msg":"[...]""[truncated 1512 bytes]; line: 1, column: 1742]]];
