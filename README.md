@@ -12,7 +12,7 @@ If you use Groks / regex to parse your logs you should be carefull not to waste 
 Our way to deal with this is a big collection of Grok-Pattern named "NU\_DATA\_ALL\_BUT\_*". Those are greedy - exept for one letter, which is the delmimiter we are looking for. Our Grok-collection utilizes those kind of patterns.
 
 I need to do a little excourse to our standard-processing-schema. Our processing happens only via pipelines, we do not use extractors or stream rules.
-The first pipeline "\[proc\] normalization" is attached to the "Default Stream". Here the parsing of _all_ messages happens. The last rule takes all messages and routes them into the next stream - the "[proc] normalized". To this stream there is another pipeline attached - called "[proc] enritchment". This pipeline add external information as reverse dns, geo-info, and so on and routes all messages in the last stage to the stream "[proc] enriched". On this last stream we again have a pipeline attached, calles "[proc]routing". Here we split up the logs into different final streams.
+The first pipeline "```[proc] normalization```" is attached to the "Default Stream". Here the parsing of _all_ messages happens. The last rule takes all messages and routes them into the next stream - the "[proc] normalized". To this stream there is another pipeline attached - called "[proc] enritchment". This pipeline add external information as reverse dns, geo-info, and so on and routes all messages in the last stage to the stream "[proc] enriched". On this last stream we again have a pipeline attached, calles "[proc]routing". Here we split up the logs into different final streams.
 
 Here is a visualisation of this model:
 ![Graylog Processing Model](Images/Processing-Model.png)
@@ -41,11 +41,13 @@ from the step above. Then change the config in Opensearch:
 ```
 curl -X PUT -d @'graylog-custom-mapping.json' -H "Content-Type: application/json" --insecure 'https://username:password@openseach.host:9200/_template/graylog-custom-mapping?pretty'
 ```
-Congratulations, you changed the fieldmapping of those field from the json!
+Congratulations, you changed the fieldmapping of those field from the json! You might run this from your Graylog-Node, as access to Opensearch should not be available from the outside. 
 
 ### Maintainance
 Now you changed your filed mapping - you might run into errors in your indexing. If your Graylog tries to write "ssh" in the field destination_port it will run into an integer - and fail. You can see this on the "/system/overview" page in your Graylog. Hopefully your Overview will always look like this:
+
 ![Indexing](Images/Indexing_Error.png)
+
 If not, you will we an error like this:
 ```
 ElasticsearchException[Elasticsearch exception [type=mapper_parsing_exception, reason=failed to parse field [fsize] of type [long] in document with id 's0me-rand0m-iD-from-Graylog'. Preview of field's value: '18302908161605107712']]; nested: ElasticsearchException[Elasticsearch exception [type=input_coercion_exception, reason=Numeric value (18302908161605107712) out of range of long (-9223372036854775808 - 9223372036854775807) at [Source: (byte[])"{"msg":"[...]""[truncated 1512 bytes]; line: 1, column: 1742]]];
@@ -53,14 +55,24 @@ ElasticsearchException[Elasticsearch exception [type=mapper_parsing_exception, r
 OpenSearchException[OpenSearch exception [type=mapper_parsing_exception, reason=failed to parse field [winlog_event_data_param1] of type [date] in document with id 's0me-rand0m-iD-from-Graylog'. Preview of field's value: 'Windows Update']]; nested: OpenSearchException[OpenSearch exception [type=illegal_argument_exception, reason=failed to parse date field [Windows Update] with format [strict_date_optional_time||epoch_millis]]]; nested: OpenSearchException[OpenSearch exception [type=date_time_parse_exception, reason=Failed to parse with all enclosed parsers]];
 ```
 
-#Content packs for parsing Cisco ASA
-In the folder "Content Packs" you will find a file with a contentpack. This contentpack includes
+# Content packs for parsing Cisco ASA
+## Installing the Contentpack
+In the folder "Content Packs" you will find a file with a contentpack. This contentpack includes all neccesary Grok-patterns as well as the neccesary rules to implement them.
+To install the content pack to on "/system/contentpacks" and click on "Upload" in the upper right. Choose the file upload the content pack.
+
+## Adding the Rules to the Pipeline
+To stay in the schema from above open the Pipeline 
+
 	Content Pack mit Rules + Groks
 	Install
 	adding to pipeline
 	check if it works
 
 Use Cases / Dashbaords
+	
+	
+	
+	
 	
 	
 	
