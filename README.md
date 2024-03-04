@@ -9,10 +9,10 @@ If you see things from this repo not working and found a fix for the problem - l
 #Prefix: how we parse logs
 If you use Groks / regex to parse your logs you should be carefull not to waste a lot of your CPU. There is a wonderfull post in the [blog by Ben Caller](https://blog.doyensec.com/2021/03/11/regexploit.html) about this topic. In short: don't use greedy operators, which are forced to do backtracking. This will ruin your performance.
 
-Our way to deal with this is a big collection of Grok-Pattern named "```NU\_DATA\_ALL\_BUT\_*```". Those are greedy - exept for one letter, which is the delmimiter we are looking for. Our Grok-collection utilizes those kind of patterns.
+Our way to deal with this is a big collection of Grok-Pattern named ```NU_DATA_ALL_BUT_*```. Those are greedy - exept for one letter, which is the delmimiter we are looking for. Our Grok-collection utilizes those kind of patterns.
 
 I need to do a little excourse to our standard-processing-schema. Our processing happens only via pipelines, we do not use extractors or stream rules.
-The first pipeline "```[proc] normalization```" is attached to the "```Default Stream```". Here the parsing of _all_ messages happens. The last rule takes all messages and routes them into the next stream - the "```[proc] normalized```". To this stream there is another pipeline attached - called "```[proc] enritchment```". This pipeline add external information as reverse dns, geo-info, and so on and routes all messages in the last stage to the stream "```[proc] enriched```". On this last stream we again have a pipeline attached, calles "```[proc]routing```". Here we split up the logs into different final streams.
+The first pipeline ```[proc] normalization``` is attached to the ```Default Stream```. Here the parsing of _all_ messages happens. The last rule takes all messages and routes them into the next stream - the ```[proc] normalized```. To this stream there is another pipeline attached - called ```[proc] enritchment```. This pipeline add external information as reverse dns, geo-info, and so on and routes all messages in the last stage to the stream ```[proc] enriched```. On this last stream we again have a pipeline attached, calles ```[proc]routing```. Here we split up the logs into different final streams.
 
 Here is a visualisation of this model:
 ![Graylog Processing Model](Images/Processing-Model.png)
@@ -21,12 +21,12 @@ Here is a visualisation of this model:
 To make the most of you logs you will nee to change the type of some of the field to certain types. IP-fields will be stored as IP - and therefore be seachable with CIDR. There are a few field with integers as well - as bytes transfered and so on. Those will be stored ad long/unsigned long and therefore we are able to calculate sums on them.
 
 ## find out the index-set
-In the folder "FieldMappings" you will find a jason-file called "```asa-custom-mapping.json```". In line four will see the name of the index this mapping applies to. To find you prefix go to the overview of streams. Here you will see the index-set your Stream for Cisco ASA lives on. Now go to /system/indices/ and search for that index set. You will be able to see the "```Index prefix```" here. Replace the current value in the "```asa-custom-mapping.json```" with that value.
+In the folder "FieldMappings" you will find a jason-file called ```asa-custom-mapping.json```. In line four will see the name of the index this mapping applies to. To find you prefix go to the overview of streams. Here you will see the index-set your Stream for Cisco ASA lives on. Now go to /system/indices/ and search for that index set. You will be able to see the ```Index prefix``` here. Replace the current value in the ```asa-custom-mapping.json``` with that value.
 
 ## apply the index set
 To apply the asa-custom-mapping.json we will need to do a curl-request to your Opensearch. 
 ### find your Opensearch host, user and pwd
-To talk to your openseach you will need the access to your Opensarch. This can be found in your server.conf in the line with "```elasticsearch_hosts```"
+To talk to your openseach you will need the access to your Opensarch. This can be found in your server.conf in the line with ```elasticsearch_hosts```
 ```
 /etc/graylog/server# cat server.conf | grep elasticsearch_hosts
 ```
@@ -64,19 +64,35 @@ To install the content pack to on ```/system/contentpacks``` and click on ```Upl
 To stay in the schema from above open the pipeline ```[proc] Normalization```. The processing will happen in those stages:
 1) Add here the rule named ```ASA_BASE``` in stage x. Here you will need to do an adjustment: add the ID of your Input, where Cicso ASA is ingested. This is important, otherwise the logs will not find their way into the parsing.
 2) in stage x+1 add the rule ```ASA_Prefix```. This will adust the prefix of the messages. Depending on your configuration of your Cisco ASA (rerouted via syslog-server, syslog config changes, ...) you will need to adjust things there. 
-3) Add all the rules named like ```ASA\_VPN\_sixDidgets\_description``` into stage x+2. This will be quite a lot of work , as there are approx 160 rules. Copy ```ASA\_VPN``` into your clipboards and paste it every time searching
+3) Add all the rules named like ```ASA_VPN_sixDidgets_description``` into stage x+2. This will be quite a lot of work , as there are approx 160 rules. Copy ```ASA_VPN``` into your clipboards and paste it every time searching
 4) add the rules ```ASA https-renaming```and ```ASA ssh-renaming``` into stage x+3. Those will fix some inconsistent logging by Cisco ASA.
 
+## monitor unpared logs
+Create yourself a Dashboard to monitor unparsed logs from Cisco ASA. We assume the filed ```vendor_syslos_id``` is set based on the base-pattern. Then search for messages not containing any fields with parsed filed like this:
+
+```
+_exists_:vendor_syslog_id AND NOT _exists_:source_ip AND NOT _exists_:user_name
+```
+
+You might need to add a few more fieldnames, if the parsing is working as it should.
 
 
-Use Cases / Dashbaords
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+# Use Cases / Dashbaords
+This is a list of Use Cases for Logs from Cisco ASA, it it not complete, nor finished. If you have more ideas please contribute:
+* with regards to Anyconnect VPN
+** look for ```vendor_syslog_id:113019``` - the logout summary. You will be able to spot, how long the users
+** collect ```vendor_syslog_id:734003``` and process it: create a rule setting a filed with the name of ```session_attribute_key``` and the value of ```session_attribute_value```. Collect those logs into single logs using our [Context Collector](https://github.com/NetUSE-AG/graylog-plugin-context-collector) 
+** Add geo-coordinates to ```source_ip``` and ```destination_ip```. Then search for ```_exists_:source_geo_coordinates AND _exists_:vpn_login_status``` and create a geo-map of logins.
+* general firewalling. You will be able to search for outdated AnyConnect Clients 
+** Look for ```vendor_syslog_id:302013 AND destination_port:3389``` to see allowed RCP Connections. A heatmap is awesome to do this!
+
+
+
+
+
+
+
+
+
+
+
