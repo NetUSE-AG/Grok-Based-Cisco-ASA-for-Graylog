@@ -80,11 +80,11 @@ You might need to add a few more fieldnames, if the parsing is working as it sho
 # Use Cases / Dashbaords
 This is a list of Use Cases for Logs from Cisco ASA, it it not complete, nor finished. If you have more ideas please contribute:
 * with regards to Anyconnect VPN
-  -- look for ```vendor_syslog_id:113019``` - the logout summary. You will be able to spot, how long the users
-  -- collect ```vendor_syslog_id:734003``` and process it: create a rule setting a filed with the name of ```session_attribute_key``` and the value of ```session_attribute_value```. Collect those logs into single logs using our [Context Collector](https://github.com/NetUSE-AG/graylog-plugin-context-collector) 
+  * look for ```vendor_syslog_id:113019``` - the logout summary. You will be able to spot, how long the users
+  * collect ```vendor_syslog_id:734003``` and process it: create a rule setting a filed with the name of ```session_attribute_key``` and the value of ```session_attribute_value```. Collect those logs into single logs using our [Context Collector](https://github.com/NetUSE-AG/graylog-plugin-context-collector) 
   -- Add geo-coordinates to ```source_ip``` and ```destination_ip```. Then search for ```_exists_:source_geo_coordinates AND _exists_:vpn_login_status``` and create a geo-map of logins.
 * general firewalling. You will be able to search for outdated AnyConnect Clients 
-  ** Look for ```vendor_syslog_id:302013 AND destination_port:3389``` to see allowed RCP Connections. A heatmap is awesome to do this!
+  * Look for ```vendor_syslog_id:302013 AND destination_port:3389``` to see allowed RCP Connections. A heatmap is awesome to do this!
 
 
 
