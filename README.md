@@ -61,12 +61,13 @@ In the folder ```Content Packs``` you will find a file with a contentpack. This 
 To install the content pack to on ```/system/contentpacks``` and click on ```Upload``` in the upper right. Choose the file upload the content pack.
 
 ## Adding the Rules to the Pipeline
-To stay in the schema from above open the Pipeline 
+To stay in the schema from above open the pipeline ```[proc] Normalization```. The processing will happen in those stages:
+1) Add here the rule named ```ASA_BASE``` in stage x. Here you will need to do an adjustment: add the ID of your Input, where Cicso ASA is ingested. This is important, otherwise the logs will not find their way into the parsing.
+2) in stage x+1 add the rule ```ASA_Prefix```. This will adust the prefix of the messages. Depending on your configuration of your Cisco ASA (rerouted via syslog-server, syslog config changes, ...) you will need to adjust things there. 
+3) Add all the rules named like ```ASA\_VPN\_sixDidgets\_description``` into stage x+2. This will be quite a lot of work , as there are approx 160 rules. Copy ```ASA\_VPN``` into your clipboards and paste it every time searching
+4) add the rules ```ASA https-renaming```and ```ASA ssh-renaming``` into stage x+3. Those will fix some inconsistent logging by Cisco ASA.
 
-	Content Pack mit Rules + Groks
-	Install
-	adding to pipeline
-	check if it works
+
 
 Use Cases / Dashbaords
 	
