@@ -15,7 +15,7 @@ I need to do a little excourse to our standard-processing-schema. Our processing
 The first pipeline "\[proc\] normalization" is attached to the "Default Stream". Here the parsing of _all_ messages happens. The last rule takes all messages and routes them into the next stream - the "[proc] normalized". To this stream there is another pipeline attached - called "[proc] enritchment". This pipeline add external information as reverse dns, geo-info, and so on and routes all messages in the last stage to the stream "[proc] enriched". On this last stream we again have a pipeline attached, calles "[proc]routing". Here we split up the logs into different final streams.
 
 Here is a visualisation of this model:
-! [Graylog Processing Model](Images/Processing-Model.png)
+![Graylog Processing Model](Images/Processing-Model.png)
 
 #Fieldnames and Types
 To make the most of you logs you will nee to change the type of some of the field to certain types. IP-fields will be stored as IP - and therefore be seachable with CIDR. There are a few field with integers as well - as bytes transfered and so on. Those will be stored ad long/unsigned long and therefore we are able to calculate sums on them.
