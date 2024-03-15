@@ -6,7 +6,7 @@ The focus here is to maximize the performance of you Graylog and get the most ou
 If you see things from this repo not working and found a fix for the problem - let us know so we can improve this. We have tested this collection with multiple instances, but still observed differences at some point.
 	
 
-#Prefix: how we parse logs
+# Prefix: how we parse logs
 If you use Groks / regex to parse your logs you should be carefull not to waste a lot of your CPU. There is a wonderfull post in the [blog by Ben Caller](https://blog.doyensec.com/2021/03/11/regexploit.html) about this topic. In short: don't use greedy operators, which are forced to do backtracking. This will ruin your performance.
 
 Our way to deal with this is a big collection of Grok-Pattern named ```NU_DATA_ALL_BUT_*```. Those are greedy - exept for one letter, which is the delmimiter we are looking for. Our Grok-collection utilizes those kind of patterns.
