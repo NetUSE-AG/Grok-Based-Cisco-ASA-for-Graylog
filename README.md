@@ -9,7 +9,7 @@ If you see things from this repo not working and maybe even found a fix for the 
 # Prefix: how we parse logs
 When using Grok / regex to parse your logs, you should be careful not to waste a lot of your CPU. There is a wonderful post in the [blog by Ben Caller](https://blog.doyensec.com/2021/03/11/regexploit.html) about this topic. In short: Don't use greedy operators, which are forced to do backtracking. This will ruin your performance.
 
-Our way to deal with this is a big collection of Grok-Pattern named ```NU_DATA_ALL_BUT_*```. Those are greedy - except for one letter, which is the delimiter we are looking for. Our Grok-collection utilizes these kind of patterns.
+Our way to deal with this is a big collection of Grok-Pattern named ```NU_DATA_ALL_BUT_*```. Those are greedy - except for one letter, which is the delimiter we are looking for. Our Grok collection utilizes this type of patterns.
 
 I need to do a little excourse to our standard-processing-schema. Our processing happens exclusively via pipelines, we do not use extractors or stream rules in Graylog.
 The first pipeline ```[proc] normalization``` is attached to the ```Default Stream```. Here the parsing of _all_ messages happens. The last rule takes all messages and routes them into the next stream - the ```[proc] normalized```. There is another pipeline called ```[proc] enrichment```, attached to this stream. This pipeline adds external information, such as reverse dns, geo-info, and so on and routes all messages in the last stage to the stream ```[proc] enriched```. On this last stream we again have a pipeline called ```[proc]routing``` attached. Here we distribute the logs into different final streams.
