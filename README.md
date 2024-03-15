@@ -11,7 +11,7 @@ If you use Groks / regex to parse your logs you should be carefull not to waste 
 
 Our way to deal with this is a big collection of Grok-Pattern named ```NU_DATA_ALL_BUT_*```. Those are greedy - exept for one letter, which is the delmimiter we are looking for. Our Grok-collection utilizes those kind of patterns.
 
-I need to do a little excourse to our standard-processing-schema. Our processing happens only via pipelines, we do not use extractors or stream rules.
+I need to do a little excourse to our standard-processing-schema. Our processing happens only via pipelines, we do not use extractors or stream rules in Graylog.
 The first pipeline ```[proc] normalization``` is attached to the ```Default Stream```. Here the parsing of _all_ messages happens. The last rule takes all messages and routes them into the next stream - the ```[proc] normalized```. To this stream there is another pipeline attached - called ```[proc] enritchment```. This pipeline add external information as reverse dns, geo-info, and so on and routes all messages in the last stage to the stream ```[proc] enriched```. On this last stream we again have a pipeline attached, calles ```[proc]routing```. Here we split up the logs into different final streams.
 
 Here is a visualisation of this model:
@@ -25,6 +25,7 @@ In the folder "FieldMappings" you will find a jason-file called ```asa-custom-ma
 
 ## apply the index set
 To apply the asa-custom-mapping.json we will need to do a curl-request to your Opensearch. 
+
 ### find your Opensearch host, user and pwd
 To talk to your openseach you will need the access to your Opensarch. This can be found in your server.conf in the line with ```elasticsearch_hosts```
 ```
@@ -36,12 +37,12 @@ To talk to your openseach you will need the access to your Opensarch. This can b
 2) customize the following command with: 
 * the right username
 * the right password
-* the right host
+* the right IP/Domain for your openseach host
 from the step above. Then change the config in Opensearch:
 ```
 curl -X PUT -d @'graylog-custom-mapping.json' -H "Content-Type: application/json" --insecure 'https://username:password@openseach.host:9200/_template/graylog-custom-mapping?pretty'
 ```
-Congratulations, you changed the fieldmapping of those field from the json! You might run this from your Graylog-Node, as access to Opensearch should not be available from the outside. 
+Congratulations, you changed the fieldmapping of those field from the json! You might run this from your Graylog-node, as access to Opensearch should not be available from the outside. 
 
 ### Maintainance
 Now you changed your filed mapping - you might run into errors in your indexing. If your Graylog tries to write ```ssh``` in the field destination_port it will run into an integer - and fail. You can see this on the ```/system/overview``` page in your Graylog. Hopefully your Overview will always look like this:
@@ -54,6 +55,19 @@ ElasticsearchException[Elasticsearch exception [type=mapper_parsing_exception, r
 
 OpenSearchException[OpenSearch exception [type=mapper_parsing_exception, reason=failed to parse field [winlog_event_data_param1] of type [date] in document with id 's0me-rand0m-iD-from-Graylog'. Preview of field's value: 'Windows Update']]; nested: OpenSearchException[OpenSearch exception [type=illegal_argument_exception, reason=failed to parse date field [Windows Update] with format [strict_date_optional_time||epoch_millis]]]; nested: OpenSearchException[OpenSearch exception [type=date_time_parse_exception, reason=Failed to parse with all enclosed parsers]];
 ```
+If you run into such errors find the field with a value not fitting to this filed and build a rule like "ASA ssh-renaming"
+
+```
+rule "ASA ssh-renaming"
+when
+  has_field("destination_port") &&
+  to_string($message.destination_port) == "ssh"
+then
+  set_field(field:"destination_port", value:22);
+end
+```
+This will change the value of the filed "destination_port" to "22" if the log from Cisco ASA says it's "ssh".
+
 
 # Content packs for parsing Cisco ASA
 ## Installing the Contentpack
@@ -64,7 +78,7 @@ To install the content pack to on ```/system/contentpacks``` and click on ```Upl
 To stay in the schema from above open the pipeline ```[proc] Normalization```. The processing will happen in those stages:
 1) Add here the rule named ```ASA_BASE``` in stage x. Here you will need to do an adjustment: add the ID of your Input, where Cicso ASA is ingested. This is important, otherwise the logs will not find their way into the parsing.
 2) in stage x+1 add the rule ```ASA_Prefix```. This will adust the prefix of the messages. Depending on your configuration of your Cisco ASA (rerouted via syslog-server, syslog config changes, ...) you will need to adjust things there. 
-3) Add all the rules named like ```ASA_VPN_sixDidgets_description``` into stage x+2. This will be quite a lot of work , as there are approx 160 rules. Copy ```ASA_VPN``` into your clipboards and paste it every time searching
+3) Add all the rules named like ```ASA_VPN_sixDidgets_description``` into stage x+2. This will be quite a lot of work , as there are approx 160 rules. Copy ```ASA_VPN``` into your clipboards and paste it every time searching. This will do the parsing for approx 160 different message-types.
 4) add the rules ```ASA https-renaming```and ```ASA ssh-renaming``` into stage x+3. Those will fix some inconsistent logging by Cisco ASA.
 
 ## monitor unpared logs
@@ -80,19 +94,14 @@ You might need to add a few more fieldnames, if the parsing is working as it sho
 # Use Cases / Dashbaords
 This is a list of Use Cases for Logs from Cisco ASA, it it not complete, nor finished. If you have more ideas please contribute:
 * with regards to Anyconnect VPN
-  * look for ```vendor_syslog_id:113019``` - the logout summary. You will be able to spot, how long the users
+  * look for ```vendor_syslog_id:113019``` - the logout summary. You will be able to spot, how long the users where logged in and how much up/download they did.
   * collect ```vendor_syslog_id:734003``` and process it: create a rule setting a filed with the name of ```session_attribute_key``` and the value of ```session_attribute_value```. Collect those logs into single logs using our [Context Collector](https://github.com/NetUSE-AG/graylog-plugin-context-collector) 
   -- Add geo-coordinates to ```source_ip``` and ```destination_ip```. Then search for ```_exists_:source_geo_coordinates AND _exists_:vpn_login_status``` and create a geo-map of logins.
+  * look for vendor_syslog_id:722051 to see the external IP of you user and the internal one in the same log
+  * ```vendor_syslog_id:725012``` contains a field ```certificate_cipher```. This tells you about the uses ciphers.
 * general firewalling. You will be able to search for outdated AnyConnect Clients 
-  * Look for ```vendor_syslog_id:302013 AND destination_port:3389``` to see allowed RCP Connections. A heatmap is awesome to do this!
-
-
-
-
-
-
-
-
+  * Look for ```vendor_syslog_id:302013 (TCP) 302015 (UDP) and AND destination_port:3389``` to see allowed RCP Connections. A heatmap is awesome to do this!
+  * look for ID 106015/106102 for denied connections. A heatmap is wonderful for this.
 
 
 
