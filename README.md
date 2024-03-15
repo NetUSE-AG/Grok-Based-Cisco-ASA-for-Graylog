@@ -3,7 +3,7 @@ This article will help you to use your Graylog to make sense of logs from Cisco 
 The focus here is to maximize the performance of you Graylog and get the most out of you logs. The extracted field will stick to the [GIM](https://schema.graylog.org/en/stable/) as good as possible. 
 
 # We help you - you help us
-If you see things from this repo not working and found a fix for the problem - let us know so we can improve this. We have tested this collection with multiple instances, but still observed differences at some point.
+If you see things from this repo not working and maybe even found a fix for the problem - let us know so we can improve this. We have tested this collection with multiple instances, but still observed differences at some point. Please make sure to add some samples as well - but please without PII.
 	
 
 # Prefix: how we parse logs
