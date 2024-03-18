@@ -1,0 +1,40 @@
+{
+    "order" : 0,
+    "index_patterns" : [
+      "ASA_Prefix1_*"
+  ],
+  "settings" : { },
+  "mappings" : {
+    "properties" : {
+      "source_ip" : {
+        "type" : "ip"
+      },
+      "destination_ip" : {
+        "type" : "ip"
+      },
+      "http_method" : {
+        "type" : "keyword"
+      },
+      "http_uri" : {
+        "type" : "keyword"
+      },
+      "vpn_session_xmt" : {
+        "type" : "long"
+      },
+      "duration" : {
+        "type" : "unsigned_long"
+      },
+      "vpn_session_rcv" : {
+        "type" : "long"
+      },
+      "full_message" : {
+        "type" : "text"
+      },
+      "bytes" : {
+        "type" : "unsigned_long"
+      }
+    }
+  },
+  "aliases" : { }
+}
+
