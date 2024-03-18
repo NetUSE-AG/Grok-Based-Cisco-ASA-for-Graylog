@@ -1,6 +1,6 @@
 # Grok-Based-Cisco-ASA-for-Graylog
 This article will help you to use your Graylog to make sense of logs from Cisco ASA.
-The focus here is to maximize the performance of you Graylog and get the most out of you logs. The extracted fields will adhere to [GIM](https://schema.graylog.org/en/stable/) as much as possible. 
+The focus here is to maximize the performance of you Graylog and get the most out of your logs. The extracted fields will adhere to [GIM](https://schema.graylog.org/en/stable/) as much as possible. 
 
 # We help you - you help us
 If you see things from this repo not working and maybe even found a fix for the problem - let us know so we can improve this. We have tested this collection on multiple instances, but still observed differences at some point. Please make sure to add some samples as well - but please without PII.
@@ -44,7 +44,7 @@ curl -X PUT -d @'graylog-custom-mapping.json' -H "Content-Type: application/json
 ```
 Congratulations, you've changed the types of the fields included in the json-file! You might want to run this from your Graylog-node, as access to Opensearch should not be available from elsewhere. 
 
-### Maintainance
+### Maintenance
 Now you changed your field mapping - you might run into errors in your indexing. If your Graylog tries to write ```ssh``` in the field destination_port, it will try to interpret it as an integer - and fail. You can see this on the ```System/Overview``` page in your Graylog. Hopefully your Overview will always look like this:
 
 ![Indexing](Images/Indexing_Error.png)
@@ -71,14 +71,14 @@ This will change the value of the field "destination_port" to "22" if it's "ssh"
 
 # Content packs for parsing Cisco ASA
 ## Installing the content pack
-In the folder ```Content Packs``` you will find a contentpack as a json-file. This contentpack includes all necessary Grok-patterns as well as the necessary rules to implement them.
+In the folder ```Content Packs``` you will find a content pack as a json-file. This content pack includes all necessary Grok-patterns as well as the necessary rules to implement them.
 To install the content pack to on ```System/Content Packs``` and click on ```Upload``` in the upper right. Choose the file upload the content pack.
 
 ## Adding the Rules to the Pipeline
 To stay in the schema from above open the pipeline ```[proc] Normalization```. The processing will happen in those stages:
 1) Add here the rule named ```ASA_BASE``` in stage x. This rule shortens the logs by their header to make parsing more consistent across different setups and gets us the field ```vendor_syslog_id```, which is used as a condition for the rules in stage x+2. Here you will need to do an adjustment: add the ID of your Input, where Cisco ASA is ingested. This is important, otherwise the logs will not find their way into the parsing.
 2) in stage x+1 add the rule ```ASA_Prefix```. This will parse the prefix of your messages. Depending on the configuration of your Cisco ASA (rerouted via syslog-server, syslog config changes, ...) you will need to adjust things there to correctly parse the hostname from the syslog header correctly. 
-3) Add all the rules named like ```ASA_VPN_sixDidgets_description``` into stage x+2. This will be quite a lot of work , as there are approx 160 rules. Copy ```ASA_VPN``` into your clipboards and paste it every time searching. This will do the parsing for approximately 160 different message-types.
+3) Add all the rules named like ```ASA_VPN_sixDidgets_description``` into stage x+2. This will be quite a lot of work, as there are approximately 160 rules. Copy ```ASA_VPN``` into your clipboards and paste it every time searching. This will do the parsing for approximately the different message-types.
 4) add the rules ```ASA https-renaming```and ```ASA ssh-renaming``` into stage x+3. Those will fix some inconsistencies in logging by Cisco ASA.
 
 ## monitor unpared logs
@@ -91,10 +91,10 @@ _exists_:vendor_syslog_id AND NOT _exists_:source_ip AND NOT _exists_:user_name
 You might need to add a few more fieldnames if the parsing is working as intended.
 
 
-# Usecases / Dashboards
-This is a list of Use Cases for Logs from Cisco ASA, it is neither complete, nor finished. If you have more ideas please contribute:
+# Use cases / Dashboards
+This is a list of Use Cases for Logs from Cisco ASA, it is neither complete, nor finished. If you have more ideas, please contribute:
 * with regards to Anyconnect VPN
-  * look for ```vendor_syslog_id:113019``` - the logout summary. You will be able to see how long the users where logged in for and how much up/download they've done in that session.
+  * look for ```vendor_syslog_id:113019``` - the logout summary. You will be able to see how long the users were logged in for and how much up/download they've done in that session.
   * collect ```vendor_syslog_id:734003``` and process it: create a rule setting a field with the name ```session_attribute_key``` and the value ```session_attribute_value```. Collect those logs into single logs using our [Context Collector](https://github.com/NetUSE-AG/graylog-plugin-context-collector) 
   -- Add geo-coordinates to ```source_ip``` and ```destination_ip```. Then search for ```_exists_:source_geo_coordinates AND _exists_:vpn_login_status``` and create a geo-map of logins.
   * look for vendor_syslog_id:722051 to see the external IP of your user and the internal one in the same log
