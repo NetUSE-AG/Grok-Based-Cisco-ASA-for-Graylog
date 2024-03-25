@@ -78,11 +78,11 @@ To install the content pack to on ```System/Content Packs``` and click on ```Upl
 To stay in the schema from above open the pipeline ```[proc] Normalization```. The processing will happen in those stages:
 1) Add here the rule named ```ASA_BASE``` in stage x. This rule shortens the logs by their header to make parsing more consistent across different setups and gets us the field ```vendor_syslog_id```, which is used as a condition for the rules in stage x+2. Here you will need to do an adjustment: add the ID of your Input, where Cisco ASA is ingested. This is important, otherwise the logs will not find their way into the parsing.
 2) in stage x+1 add the rule ```ASA_Prefix```. This will parse the prefix of your messages. Depending on the configuration of your Cisco ASA (rerouted via syslog-server, syslog config changes, ...) you will need to adjust things there to correctly parse the hostname from the syslog header correctly. 
-3) Add all the rules named like ```ASA_VPN_sixDidgets_description``` into stage x+2. This will be quite a lot of work, as there are approximately 160 rules. Copy ```ASA_VPN``` into your clipboards and paste it every time searching. This will do the parsing for approximately the different message-types.
+3) Add all the rules named like ```ASA_VPN_sixDidgets_description``` into stage x+2. This will be quite a lot of work, as there are approximately 160 rules. Copy ```ASA_VPN``` into your clipboards and paste it every time searching. This will do the parsing for the different message-types.
 4) add the rules ```ASA https-renaming```and ```ASA ssh-renaming``` into stage x+3. Those will fix some inconsistencies in logging by Cisco ASA.
 
 ## monitor unpared logs
-Create yourself a Dashboard to monitor unparsed logs from Cisco ASA. We assume the filed ```vendor_syslos_id``` is set based on the base-pattern. Then search for messages not containing any parsed fields like this:
+Create yourself a Dashboard to monitor unparsed logs from Cisco ASA. We assume the filed ```vendor_syslog_id``` is set based on the base-pattern. Then search for messages not containing any parsed fields like this:
 
 ```
 _exists_:vendor_syslog_id AND NOT _exists_:source_ip AND NOT _exists_:user_name
