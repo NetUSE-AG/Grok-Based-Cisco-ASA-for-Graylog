@@ -82,7 +82,7 @@ To stay in the schema from above open the pipeline ```[proc] Normalization```. T
 4) add the rules ```ASA https-renaming```and ```ASA ssh-renaming``` into stage x+3. Those will fix some inconsistencies in logging by Cisco ASA.
 
 ## monitor unpared logs
-To Monitor unparsed logs, simply set ```log_missing``` to ```True``` in the ```ASA_apply_grok``` pipeline rule and look for entries in the Graylog log. 
+To monitor unparsed logs, simply set ```log_missing``` to ```True``` in the ```ASA_apply_grok``` pipeline rule and look for entries in the Graylog log. 
 
 
 # Use cases / Dashboards
