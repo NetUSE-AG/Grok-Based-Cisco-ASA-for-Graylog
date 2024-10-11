@@ -1,0 +1,3887 @@
+{
+  "v": 1,
+  "id": "a79bd2f2-0b12-4455-a3a5-b80c08b04f83",
+  "rev": 1,
+  "name": "Cisco-ASA-Parsing20241011",
+  "summary": "Parsing for Cisco ASA Logs by NetUSE",
+  "description": "Parsing for Cisco ASA using Grok",
+  "vendor": "NetUSE AG",
+  "url": "https://github.com/NetUSE-AG/Grok-Based-Cisco-ASA-for-Graylog",
+  "parameters": [],
+  "entities": [
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "9798794f-6b32-40b9-99e0-8323c669cc06",
+      "data": {
+        "name": "NU_ASA_VPN_769007",
+        "pattern": "%ASA-%{INT}-769007: UPDATE: Image version is %{NU_DATA_ALL_BUT_SPACE:service_version}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "b8979a68-0009-4283-81c8-9169edf27f93",
+      "data": {
+        "name": "NU_ASA_VPN_317077",
+        "pattern": "%ASA-%{INT}-317077: Added %{NU_DATA_ALL_BUT_SPACE:protocol} route %{NU_DATA_ALL_BUT_SPACE:destination_ip} %{NU_DATA_ALL_BUT_SPACE:destination_netmask} via %{NU_DATA_ALL_BUT_SPACE:destination_nexthop}(?: \\[[0-9]+/[0-9]+\\])? on %{NU_DATA_ALL_BUT_OPENED_CORNERED_BRACKET:network_interface_out} tableid \\[%{NU_DATA_ALL_BUT_CLOSED_CORNERED_BRACKET:network_tableid}\\]"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "db604a2e-bd1c-4621-94e2-f2c9ce831485",
+      "data": {
+        "name": "NU_ASA_VPN_317080",
+        "pattern": "%ASA-6-317080: Deleted %{NU_DATA_ALL_BUT_SPACE:protocol} route %{IP:destination_ip}/%{NU_DATA_ALL_BUT_SPACE:network_masklength}(?: \\[[0-9]+/[0-9]+\\])? via %{NU_DATA_ALL_BUT_SPACE:network_interface_out} tableid \\[%{NU_DATA_ALL_BUT_CLOSED_CORNERED_BRACKET:tableid}\\]"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0526633b-50f4-4c7c-b925-f6bf7d5b59a5",
+      "data": {
+        "name": "NU_ASA_VPN_737016",
+        "pattern": "%ASA-%{INT}-737016: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, Freeing local pool %{NU_DATA_ALL_BUT_SPACE:vendor_dhcp_pool_name} address %{IP:source_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a56e7268-9a9a-4038-a367-ab57b760d0e4",
+      "data": {
+        "name": "NU_ASA_VPN_109210",
+        "pattern": "%ASA-%{INT}-109210: UAUTH: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, User=%{NU_DATA_ALL_BUT_COMMA:user_name}, Assigned IP=%{NU_DATA_ALL_BUT_COMMA:source_ip}, Succeeded removing entry."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "75838e61-9943-4dd5-b086-5d958b062afb",
+      "data": {
+        "name": "NU_ASA_VPN_209005",
+        "pattern": "%ASA-%{INT}-209005: Discard IP fragment set with more than 24 elements: src = %{IP:source_ip}, dest = %{IP:destination_ip}, proto = %{NU_DATA_ALL_BUT_COMMA:protocol}, id = %{NONNEGINT:session_id}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "fabc3d55-c414-4b07-962b-cf73e8cdde80",
+      "data": {
+        "name": "NU_ASA_VPN_106102",
+        "pattern": "%ASA-%{INT}-106102: access-list %{NU_DATA_ALL_BUT_SPACE:vendor_access_list} denied %{NU_DATA_ALL_BUT_SPACE:network_transport} for user '%{NU_DATA_ALL_BUT_APOSTROPHE:user_name}' %{NU_DATA_ALL_BUT_SLASH:network_interface_in}/%{IP:source_ip}\\(%{NONNEGINT:source_port}\\) -> %{NU_DATA_ALL_BUT_SLASH:network_interface_out}/%{IP:destination_ip}\\(%{NONNEGINT:destination_port}\\) hit-cnt %{NONNEGINT:vendor_hit_count}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "53ac096d-9492-4af6-826b-808ce0f7e43f",
+      "data": {
+        "name": "NU_ASA_VPN_737036",
+        "pattern": "%ASA-%{INT}-737036: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, Client assigned %{IP:source_ip} from DHCP"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "cd440822-f962-451f-8012-f8db4bebf2cd",
+      "data": {
+        "name": "NU_ASA_VPN_737003",
+        "pattern": "%ASA-%{INT}-737003: IPAA: Session=%{WORD:session_id}, DHCP configured, no viable servers found for tunnel-group '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:policy_name}'"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "34ac3137-8558-4104-b85e-574d45f2b4ca",
+      "data": {
+        "name": "NU_ASA_VPN_113023",
+        "pattern": "%ASA-2-113023: AAA Marking %{WORD:protocol} server %{IP:source_ip} in %{NU_DATA_ALL_BUT_SPACE:vendor_server_group} group %{NU_DATA_ALL_BUT_SPACE:vendor_server_tag} as ACTIVE"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4666535a-722f-4897-942e-775ec38c0cc8",
+      "data": {
+        "name": "NU_ASA_VPN_722011",
+        "pattern": "%ASA-%{INT}-722011: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> SVC Message: 17/WARNING: Reconnecting the VPN tunnel.."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "12d88f7d-c544-47c2-aad9-ab0a86c75fe9",
+      "data": {
+        "name": "NU_ASA_VPN_722051",
+        "pattern": "%ASA-%{INT}-722051: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{NU_DATA_ALL_BUT_GREATER_THAN:source_ip}> IPv4 Address <%{NU_DATA_ALL_BUT_GREATER_THAN:source_nat_ip}> IPv6 address <%{NU_DATA_ALL_BUT_GREATER_THAN:source_nat_ipv6}> assigned to session"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4798dffd-bcfd-4c2d-8c71-3fe0d5c151b0",
+      "data": {
+        "name": "NU_ASA_VPN_317078",
+        "pattern": "%ASA-%{INT}-317078: Deleted %{NU_DATA_ALL_BUT_SPACE:protocol} route %{NU_DATA_ALL_BUT_SPACE:destination_ip} %{NU_DATA_ALL_BUT_SPACE:destination_netmask} via %{NU_DATA_ALL_BUT_SPACE:destination_nexthop}(?: \\[[0-9]+/[0-9]+\\])? on %{GREEDYDATA:network_interface_out}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "454dd9f7-c9b6-4b22-ad1e-5b96b997f758",
+      "data": {
+        "name": "NU_ASA_VPN_725006",
+        "pattern": "%ASA-%{INT}-725006: Device failed SSL handshake with client %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c702e16a-b05e-4d38-8b54-33201dace5c2",
+      "data": {
+        "name": "NU_ASA_VPN_725007",
+        "pattern": "%ASA-%{INT}-725007: SSL session with client %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} terminated"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "745068c8-74dd-4f31-8faa-5487e5609cbc",
+      "data": {
+        "name": "NU_ASA_VPN_722012",
+        "pattern": "%ASA-%{INT}-722012: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> SVC Message: 16/NOTICE:%{GREEDYDATA:vendor_event_outcome_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c7c4a602-74f7-4dcf-a530-b81f4545ad98",
+      "data": {
+        "name": "NU_ASA_VPN_109201",
+        "pattern": "%ASA-%{INT}-109201: UAUTH: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, User=%{NU_DATA_ALL_BUT_COMMA:user_name}, Assigned IP=%{NU_DATA_ALL_BUT_COMMA:source_ip}, Succeeded adding entry."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c28ce71c-e154-4113-a18f-fe5f3ad88c9c",
+      "data": {
+        "name": "NU_ASA_VPN_722001",
+        "pattern": "%ASA-%{INT}-722001: IP <%{IP:source_ip}> Error parsing SVC connect request."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "dc1cf648-063d-4f46-aefb-13eb9f2cc32b",
+      "data": {
+        "name": "NU_ASA_VPN_602304",
+        "pattern": "%ASA-%{INT}-602304: IPSEC: An %{NU_DATA_ALL_BUT_SPACE:network_direction} %{NU_DATA_ALL_BUT_SPACE:network_tunnel_type} SA \\(SPI=%{NU_DATA_ALL_BUT_CLOSED_BRACKET:network_spi}\\) between %{NU_DATA_ALL_BUT_SPACE:source_ip} and %{NU_DATA_ALL_BUT_SPACE:destination_ip} \\(user=%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\) has been deleted\\."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "dc7dbb9c-673f-4f34-81a2-a9b48c3da8fb",
+      "data": {
+        "name": "NU_ASA_VPN_722035",
+        "pattern": "%ASA-%{INT}-722035: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_SPACE:user_name}> IP <%{IP:ip}> Received large packet %{NONNEGINT:network_bytes}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "b063f600-8da1-4e71-b276-f61eef3645ec",
+      "data": {
+        "name": "NU_ASA_VPN_606002",
+        "pattern": "%ASA-%{INT}-606002: ASDM session number %{NONNEGINT:session_id} from %{IP:source_ip} ended"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "beb43636-f5ea-4d98-ad19-6735ba9a695d",
+      "data": {
+        "name": "NU_ASA_VPN_722033",
+        "pattern": "%ASA-%{INT}-722033: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> First %{NU_DATA_ALL_BUT_SPACE:network_transport} SVC connection established for SVC session."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f1a59bb4-c181-4c25-8309-81617d087aac",
+      "data": {
+        "name": "NU_ASA_VPN_752003",
+        "pattern": "%ASA-%{INT}-752003: Tunnel Manager dispatching a KEY_ACQUIRE message to IKEv2. Map Tag = %{NU_DATA_ALL_BUT_DOT:vendor_map_tag}. Map Sequence Number = %{NONNEGINT:vendor_map_number}."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3a0e5d8c-1236-4207-ab9b-478deac84fb7",
+      "data": {
+        "name": "NU_ASA_VPN_304001",
+        "pattern": "%ASA-%{INT}-304001: %{IP:source_ip} Accessed URL %{IP:destination_ip}:%{NU_DATA_ALL_BUT_SPACE:http_uri}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "42a24e6e-bcea-47d0-8cca-c307e90dae32",
+      "data": {
+        "name": "NU_ASA_VPN_717055",
+        "pattern": "%ASA-%{INT}-717055: The <ID> certificate in the trustpoint <%{NU_DATA_ALL_BUT_GREATER_THAN:vendor_trust_point}> has expired. Expiration <%{NU_DATA_ALL_BUT_GREATER_THAN:certificate_expiration_date}> Subject Name <cn=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_common_name},ou=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_organizational_unit},o=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_organization},l=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_locality},st=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_name_state},c=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_country}> Issuer Name <cn=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_common_name},ou=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_organizational_unit},o=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_organization},c=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_locality}> Serial Number <%{NU_DATA_ALL_BUT_GREATER_THAN:certificate_subject_serial_number}>"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "46dc983c-0e59-4b8c-85ca-0eafbe00933f",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "ASA_BASE"
+        },
+        "description": {
+          "@type": "string",
+          "@value": "Parse ASA_Base"
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"ASA_BASE\"\nwhen\n  (to_string($message.gl2_source_input) == \"5ff87a35d9498d01b436d509\" ||   \n   to_string($message.gl2_source_input) == \"60142d77a505c76993ad9016\") \nthen\n  set_fields(\n    grok(\n      pattern:\"%{NU_ASA_BASE}\",\n      value:to_string($message.message),\n      only_named_captures:true\n    )\n  );\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c062eb81-1a3c-41d1-b9cb-2096c6de020e",
+      "data": {
+        "name": "NU_ASA_VPN_710003",
+        "pattern": "%ASA-%{INT}-710003: TCP access denied by ACL from %{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "5c0f7fe1-ec8d-48d0-b09b-62b590c9df57",
+      "data": {
+        "name": "NU_ASA_VPN_722028",
+        "pattern": "%ASA-%{INT}-722028: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <(%{NU_DATA_ALL_BUT_GREATER_THAN:user_name})?> IP <%{IP:source_ip}>"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c25cd718-db37-48f7-95ff-64559ce10862",
+      "data": {
+        "name": "NU_ASA_VPN_717009",
+        "pattern": "%ASA-%{INT}-717009: Certificate validation failed. (No suitable trustpoints found to validate certificate|Invalid signature,) serial number: %{NU_DATA_ALL_BUT_COMMA:source_id}, subject name: (cn|CN)=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_common_name}(,ou=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_organizational_unit},o=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_organization},c=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_country}|,serialNumber=%{NU_DATA_ALL_BUT_DOT:certificate_subject_serial_number})?(, issuer name: )?(cn=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_common_name},ou=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_organizational_unit},o=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_organization},c=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_locality}|dc=%{NU_DATA_ALL_BUT_DOT:certificate_issuer_domain_component})?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "40bd8185-07f7-4219-ac52-6245cf0b1b70",
+      "data": {
+        "name": "NU_ASA_VPN_716059",
+        "pattern": "%ASA-%{INT}-716059: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> AnyConnect session resumed connection from IP <%{IP}>."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0fa19cda-f9ae-462e-9bda-86bbb13de53f",
+      "data": {
+        "name": "NU_ASA_VPN_737034",
+        "pattern": "%ASA-%{INT}-737034: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, IPv6 address:"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "e425f9e2-4f1f-4d99-8914-68f0524b2eae",
+      "data": {
+        "name": "NU_ASA_VPN_721016",
+        "pattern": "%ASA-%{INT}-721016: \\(WebVPN-(Secondary|Primary)\\) WebVPN session for client user %{NU_DATA_ALL_BUT_COMMA:user_name}, %{WORD} %{IP:source_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "803a4a02-cb72-43a4-8e36-cc2b784524c7",
+      "data": {
+        "name": "NU_ASA_VPN_111001",
+        "pattern": "%ASA-%{INT}-111001: Begin configuration: %{IP:source_ip} writing to memory"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "3d175f22-b32e-4f92-91e1-08d161384d00",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "ASA_Prefix"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"ASA_Prefix\"\nwhen \nhas_field(\"asa_prefix\")\nthen\n    set_field(\"message\",substring(to_string($message.message),length(to_string($message.asa_prefix))));\nend\n"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "dc49eba7-e13e-482a-8c46-497ce9ab7b73",
+      "data": {
+        "name": "NU_ASA_VPN_106103",
+        "pattern": "%ASA-%{INT}-106103: access-list %{NU_DATA_ALL_BUT_SPACE:vendor_access_list} denied %{NU_DATA_ALL_BUT_SPACE:network_transport} for user '<?%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}>?' %{NU_DATA_ALL_BUT_SLASH:network_interface_in}/%{IP:source_ip}\\(%{NONNEGINT:source_port}\\) -> %{NU_DATA_ALL_BUT_SLASH:network_interface_out}/%{IP:destination_ip}\\(%{NONNEGINT:destination_port}\\) hit-cnt %{NONNEGINT:network_packets}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a1b14b2a-5abd-45e9-8d7a-2d53b96f6ef4",
+      "data": {
+        "name": "NU_ASA_VPN_419002",
+        "pattern": "%ASA-%{INT}-419002: Duplicate TCP SYN from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port} with different initial sequence number"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6c61f508-59c9-4b76-b260-7b44dea0a3b8",
+      "data": {
+        "name": "NU_ASA_VPN_602303",
+        "pattern": "%ASA-%{INT}-602303: IPSEC: An %{NU_DATA_ALL_BUT_SPACE:network_direction} %{NU_DATA_ALL_BUT_SPACE:network_tunnel_type} SA \\(SPI=%{NU_DATA_ALL_BUT_CLOSED_BRACKET:network_spi}\\) between %{NU_DATA_ALL_BUT_SPACE:source_ip} and %{NU_DATA_ALL_BUT_SPACE:destination_ip} \\(user=%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\) has been created\\."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "1faa2fb6-4bba-4e85-b065-f9a9397e6373",
+      "data": {
+        "name": "NU_ASA_VPN_710005",
+        "pattern": "%ASA-%{INT}-710005: %{NU_DATA_ALL_BUT_SPACE:network_transport} request discarded from %{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2ef8614a-26ad-4544-bb9e-6490dda3a536",
+      "data": {
+        "name": "NU_ASA_VPN_110002",
+        "pattern": "%ASA-%{INT}-110002: Failed to locate egress interface for %{NU_DATA_ALL_BUT_SPACE:network_transport} from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ffc85b04-0fa2-40bf-ba91-4f0c4ab81037",
+      "data": {
+        "name": "NU_ASA_VPN_106006",
+        "pattern": "%ASA-%{INT}-106006: Deny %{NU_DATA_ALL_BUT_SPACE:network_direction} %{NU_DATA_ALL_BUT_SPACE:network_transport} from %{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} on interface %{GREEDYDATA:network_interface_out}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "828eee27-687e-4edf-8a5d-2740e24cd6e7",
+      "data": {
+        "name": "NU_ASA_VPN_106023",
+        "pattern": "%ASA-%{INT}-106023: Deny %{NU_DATA_ALL_BUT_SPACE:network_transport} src %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port} dst %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} by access-group \"%{NU_DATA_ALL_BUT_QUOTES:policy_name}\""
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "127cc43d-aa31-46c1-aba5-a3b38062c34b",
+      "data": {
+        "name": "NU_ASA_VPN_722003",
+        "pattern": "%ASA-%{INT}-722003: IP <%{IP:source_ip}> Error authenticating SVC connect request."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6a93e1e4-31b5-4008-9628-933f4d0a134c",
+      "data": {
+        "name": "NU_ASA_VPN_725001",
+        "pattern": "%ASA-%{INT}-725001: Starting SSL handshake with %{NU_DATA_ALL_BUT_SPACE:network_ssl_partner} %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} for (D)?TLS session"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "42c1e186-8e3c-40ac-941d-a3a8f973d6be",
+      "data": {
+        "name": "NU_ASA_VPN_418001",
+        "pattern": "%ASA-%{INT}-418001: Through-the-device packet to/from management-only network is denied: %{NU_DATA_ALL_BUT_SPACE:network_transport} src management:%{IP:source_ip}/%{NONNEGINT:source_port}(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? dst %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "1cb0215f-92be-4f9f-b124-0ea501d4be46",
+      "data": {
+        "name": "NU_ASA_VPN_302010",
+        "pattern": "%ASA-6-302010: %{NONNEGINT:vendor_connections_in_use} in use, %{NONNEGINT:vendor_connections_max_used} most used"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "fc14cee4-4a7b-49ac-85d1-53e499fb9b67",
+      "data": {
+        "name": "NU_ASA_VPN_717025",
+        "pattern": "%ASA-%{INT}-717025: Validating certificate chain containing %{NONNEGINT:certificate_chain_amount}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "c6028206-b1a4-4784-83ef-d1841de152a9",
+      "data": {
+        "name": "NU_ASA_VPN_109029",
+        "pattern": "%ASA-%{INT}-109029: Parsing downloaded ACL: WARNING: <%{NU_DATA_ALL_BUT_GREATER_THAN:vendor_access_list}> found duplicate element#%{NONNEGINT:event_code}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "81566234-c54b-41fd-b657-0ea3a5caa4c7",
+      "data": {
+        "name": "NU_ASA_VPN_609001",
+        "pattern": "%ASA-%{INT}-609001: Built local-host %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "9c04d01f-7f7a-4c56-8527-73d658f05629",
+      "data": {
+        "name": "NU_ASA_VPN_611101",
+        "pattern": "%ASA-%{INT}-611101: User authentication succeeded: IP address: %{IP:source_ip}, Uname: %{GREEDYDATA:user_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f92282ee-464d-48d3-a7ef-ab910888d6d8",
+      "data": {
+        "name": "NU_ASA_VPN_113009",
+        "pattern": "%ASA-%{INT}-113009: AAA retrieved default group policy \\(%{NU_DATA_ALL_BUT_CLOSED_BRACKET:policy_name}\\) for user = %{GREEDYDATA:user_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d68d804e-9a44-4cf4-aad6-5530c609380f",
+      "data": {
+        "name": "NU_ASA_VPN_722053",
+        "pattern": "%ASA-%{INT}-722053: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> Unknown client <%{NU_DATA_ALL_BUT_GREATER_THAN:client_type}> connection"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0a60f123-189f-4757-9339-e9f0307c0d54",
+      "data": {
+        "name": "NU_ASA_VPN_710006",
+        "pattern": "%ASA-%{INT}-710006: %{NU_DATA_ALL_BUT_SPACE:network_transport} request discarded from %{IP:source_ip} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "e0063084-8e59-48ff-8813-01564cf6d53c",
+      "data": {
+        "name": "NU_ASA_VPN_602101",
+        "pattern": "%ASA-%{INT}-602101: PMTU-D packet %{NONNEGINT:network_packets_sent} bytes greater than effective mtu %{NONNEGINT:network_mtu}, dest_addr=%{IP:source_ip}, src_addr=%{IP:source_ip}, prot=%{NU_DATA_ALL_BUT_SPACE:network_transport}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "5e3377be-cb3f-4185-b1b5-ab8297a036e7",
+      "data": {
+        "name": "NU_ASA_VPN_725022",
+        "pattern": "%ASA-%{INT}-725022: Device skipping cipher: %{NU_DATA_ALL_BUT_SPACE:network_connection_cypher} - Key exchange and/or authentication algorithm do not match with trust-point %{NU_DATA_ALL_BUT_DOT:vendor_trust_point}\\. Connection info: %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{NU_DATA_ALL_BUT_SLASH:source_ip}/%{NU_DATA_ALL_BUT_SPACE:source_port} to %{NU_DATA_ALL_BUT_SLASH:destination_ip}/%{GREEDYDATA:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "15e24d33-41b0-40ad-a22c-4cf96bc2ba2b",
+      "data": {
+        "name": "NU_ASA_VPN_302013",
+        "pattern": "%ASA-%{INT}-302013: Built %{NU_DATA_ALL_BUT_SPACE:network_direction} TCP connection %{NONNEGINT:session_id} for %{NU_DATA_ALL_BUT_COLON:network_interface_in}:(%{IP:source_ip}|%{NU_DATA_ALL_BUT_SLASH:source_hostname})/%{NONNEGINT:source_port} \\((%{IP:source_ip}|%{NU_DATA_ALL_BUT_SLASH:source_hostname})/%{NONNEGINT:source_port}\\)(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:(%{IP:destination_ip}|%{NU_DATA_ALL_BUT_SLASH:destination_hostname})/%{NONNEGINT:destination_port} \\((%{IP:destination_nat_ip}|%{NU_DATA_ALL_BUT_SLASH:destination_nat_hostname})/%{NONNEGINT:destination_nat_port}\\)( \\(%{NU_DATA_ALL_BUT_CLOSED_BRACKET:destination_user_name}\\))?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "94d00ffe-fce3-437b-b44d-730a71b1a5f1",
+      "data": {
+        "name": "NU_ASA_VPN_750001",
+        "pattern": "%ASA-%{INT}-750001: Local:%{IP:source_ip}:%{NONNEGINT:source_port} Remote:%{IP:source_ip}:%{NONNEGINT:source_port} Username:%{NU_DATA_ALL_BUT_SPACE:user_name} IKEv2 Received request to %{NU_DATA_ALL_BUT_SPACE:network_protocol_request} an IPsec tunnel; local traffic selector = Address Range: %{NU_DATA_ALL_BUT_SPACE:source_network_range} Protocol: %{NU_DATA_ALL_BUT_SPACE:source_protocol} Port Range: %{NU_DATA_ALL_BUT_SEMICOLON:source_network_port_range}; remote traffic selector = Address Range: %{NU_DATA_ALL_BUT_SPACE:destination_network_range} Protocol: %{NU_DATA_ALL_BUT_SPACE:destination_protocol} Port Range: %{NU_DATA_ALL_BUT_SPACE:destination_network_port_range}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "425136a6-ec97-4dca-a682-7e4219e4b9cf",
+      "data": {
+        "name": "NU_ASA_VPN_106017",
+        "pattern": "%ASA-%{INT}-106017: Deny IP due to Land Attack from %{IP:source_ip} to %{IP:destination_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a437143b-4af9-4ba1-aff3-69eb63dbc1bd",
+      "data": {
+        "name": "NU_ASA_VPN_717022",
+        "pattern": "%ASA-%{INT}-717022: Certificate was successfully validated. serial number: %{NU_DATA_ALL_BUT_COMMA:certificate_subject_serial_number}, subject name:  (cn|CN)=(%{IP:source_ip}_server|%{NU_DATA_ALL_BUT_COMMA:user_name})(,serialNumber=%{NU_DATA_ALL_BUT_COMMA:certificate_subject_serial_number})?(,OU=%{NU_DATA_ALL_BUT_DOT:certificate_subject_organizational_unit})?.*"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "9cb5e9d1-81c9-4fe9-998e-9e9983b5ff75",
+      "data": {
+        "name": "NU_ASA_VPN_113025",
+        "pattern": "%ASA-%{INT}-113025: Group %{NU_DATA_ALL_BUT_COLON:policy_name}: Username could not be found in certificate or CSD data.  Could not authenticate ssl-client connection from %{IP:source_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "afda943a-e682-4090-bb45-b7d3416b1483",
+      "data": {
+        "name": "NU_ASA_VPN_722034",
+        "pattern": "%ASA-%{INT}-722034: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> New TCP SVC connection, no existing connection."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6787339f-2589-4801-ba47-719201ef3781",
+      "data": {
+        "name": "NU_ASA_VPN_212004",
+        "pattern": "%ASA-%{INT}-212004: Unable to send an SNMP response to IP address %{IP:destination_ip}  Port %{NONNEGINT:destination_port}  Interface \"%{NU_DATA_ALL_BUT_QUOTES:network_interface_out}\", error code = %{INT:event_error_code}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "afba5039-70ef-4515-8cea-e2ace53bf20b",
+      "data": {
+        "name": "NU_ASA_VPN_716002",
+        "pattern": "%ASA-%{INT}-716002: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> WebVPN session terminated:%{GREEDYDATA:vendor_event_outcome_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6357ecb7-3d91-45dd-8724-48ebc4726b5e",
+      "data": {
+        "name": "NU_ASA_VPN_725008",
+        "pattern": "%ASA-%{INT}-725008: SSL client %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} proposes the following %{NONNEGINT:vendor_event_outcome}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f2292cdb-85bf-46aa-87c1-22d1b0aa3c93",
+      "data": {
+        "name": "NU_ASA_VPN_607001",
+        "pattern": "%ASA-%{INT}-607001: Pre-allocate SIP (%{NU_DATA_ALL_BUT_SPACE:network_transport} ){1,2}secondary channel for %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip} from %{NU_DATA_ALL_BUT_SPACE:vendor_event_outcome_reason} message"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "65ab9a12-5602-4484-8131-c60ad80d42f2",
+      "data": {
+        "name": "NU_ASA_VPN_737037",
+        "pattern": "%ASA-%{INT}-737037: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, Failed to assign address %{IP:source_ip}: Callback failure returning DHCP assigned address."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a6bacb07-26b0-4adb-a508-59221af25b80",
+      "data": {
+        "name": "NU_ASA_VPN_717056",
+        "pattern": "%ASA-%{INT}-717056: Attempting CRL revocation check from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} using HTTP"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "9ee0dd3f-33dd-4069-a824-f22adc697b08",
+      "data": {
+        "name": "NU_ASA_VPN_113039",
+        "pattern": "%ASA-%{INT}-113039: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> AnyConnect parent session started."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "57703e7f-9488-47cd-a101-ff4fa047e04c",
+      "data": {
+        "name": "NU_ASA_VPN_716001",
+        "pattern": "%ASA-%{INT}-716001: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> WebVPN session started."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "22debb30-1cc0-4c52-b971-53e86ca37d11",
+      "data": {
+        "name": "NU_ASA_VPN_734003",
+        "pattern": "%ASA-%{INT}-734003: DAP: User %{NU_DATA_ALL_BUT_COMMA:user_name}, Addr %{IP:source_ip}: Session Attribute %{NU_DATA_ALL_BUT_SPACE:session_attribute_key} =( %{GREEDYDATA:session_attribute_value})?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "03f2db8d-e16b-4990-9ad7-8d1d41bf1779",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "ASA_apply_grok"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"ASA_apply_grok\"\nwhen\n  has_field(\"vendor_syslog_id\") and has_field(\"vendor_syslog_facility\") and\n  to_string($message.vendor_syslog_facility) == \"ASA\" and\n  grok_exists(\n    pattern: concat(\n      first: \"NU_ASA_VPN_\",\n      second: to_string($message.vendor_syslog_id)\n    )\n  )\nthen\n  set_fields(\n    fields: grok(\n      pattern: concat(\n        first: \"%{\",\n        second: concat(\n          first: \"NU_ASA_VPN_\",\n          second: concat(\n            first: to_string($message.vendor_syslog_id),\n            second: \"}\"\n          )\n        )\n      ),\n      value: to_string($message.message),\n      only_named_captures: true\n    )\n  );\nend"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "adb58137-2ac4-4040-aad3-0d00546fbc04",
+      "data": {
+        "name": "NU_ASA_VPN_313008",
+        "pattern": "%ASA-%{INT}-313008: Denied IPv6-ICMP type=%{NU_DATA_ALL_BUT_COMMA:network_icmp_type}, code=%{NU_DATA_ALL_BUT_SPACE:network_icmp_code} from %{NU_DATA_ALL_BUT_SPACE:source_ipv6} on interface %{GREEDYDATA:source_interface}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3809669a-6081-4f21-8707-da7ff317d8a5",
+      "data": {
+        "name": "NU_ASA_VPN_106007",
+        "pattern": "%ASA-%{INT}-106007: Deny inbound UDP from %{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2579ac6f-38a7-47e9-9b54-faf3b738919f",
+      "data": {
+        "name": "NU_ASA_VPN_716039",
+        "pattern": "%ASA-%{INT}-716039: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> Authentication: rejected, Session Type: %{GREEDYDATA:service_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "207190a2-bf83-4de8-8e54-81beef4aebc1",
+      "data": {
+        "name": "NU_ASA_VPN_109207",
+        "pattern": "%ASA-%{INT}-109207: UAUTH: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, User=%{NU_DATA_ALL_BUT_COMMA:user_name}, Assigned IP=%{NU_DATA_ALL_BUT_COMMA:source_ip}, Succeeded updating entry."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ff0c74fd-4637-46f0-9b2d-d0bdccc4cdac",
+      "data": {
+        "name": "NU_ASA_VPN_717029",
+        "pattern": "%ASA-%{INT}-717029: Identified client certificate within certificate chain. serial number: %{NU_DATA_ALL_BUT_COMMA:source_id}, subject name: CN=%{NU_DATA_ALL_BUT_COMMA:user_name}(,serialNumber=%{NU_DATA_ALL_BUT_DOT:source_id})?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d0f84b6b-1adb-4f66-9024-afa08f0435ca",
+      "data": {
+        "name": "NU_ASA_VPN_733100",
+        "pattern": "%ASA-%{INT}-733100: \\[ (   )?(Port-%{NU_DATA_ALL_BUT_CLOSED_CORNERED_BRACKET:network_port_range}|  %{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_SPACE:user_name}%{NU_DATA_ALL_BUT_CLOSED_CORNERED_BRACKET:vendor_object}|%{NU_DATA_ALL_BUT_CLOSED_CORNERED_BRACKET:vendor_object})\\] drop rate%{INT:vendor_rate_id} exceeded. Current burst rate is %{NONNEGINT:vendor_rate_burst_value} per second, max configured rate is %{NONNEGINT:vendor_rate_burst_value_set}; Current average rate is %{NONNEGINT:current_average_rate} per second, max configured rate is %{NONNEGINT}; Cumulative total count is %{NONNEGINT:cummulative_total_count}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f1cd45bd-cfc6-43c5-9e27-04d2c66071db",
+      "data": {
+        "name": "NU_ASA_VPN_605005",
+        "pattern": "%ASA-%{INT}-605005: Login permitted from %{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:destination_ip}/%{NU_DATA_ALL_BUT_SPACE:destination_port} for user \"%{NU_DATA_ALL_BUT_QUOTES:user_name}\""
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6e448bab-9416-4e57-af3e-11a7e834bef3",
+      "data": {
+        "name": "NU_ASA_VPN_111005",
+        "pattern": "%ASA-%{INT}-111005: %{IP:source_ip} end configuration: OK"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "265cdb82-8535-4ae1-b7c6-3aeced85fd2d",
+      "data": {
+        "name": "NU_ASA_VPN_313001",
+        "pattern": "%ASA-%{INT}-313001: Denied ICMP type=%{NONNEGINT:network_icmp_type}, code=%{NONNEGINT:network_icmp_code} from %{IP:source_ip} on interface %{GREEDYDATA:network_interface_in}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a4c97109-baab-44c1-952e-8c46563fff28",
+      "data": {
+        "name": "NU_ASA_VPN_606004",
+        "pattern": "%ASA-%{INT}-606004: ASDM logging session number %{NONNEGINT:session_id} from %{IP:source_ip} ended"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d41b2c08-febc-43ab-b23a-de66c0db47f7",
+      "data": {
+        "name": "NU_ASA_VPN_414007",
+        "pattern": "%ASA-%{INT}-414007: %{NU_DATA_ALL_BUT_SPACE:network_transport} syslog server connection restored.  New connections allowed."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "b3ac8a2b-bb9c-44e1-9f0b-73c9b4e55f7d",
+      "data": {
+        "name": "NU_ASA_VPN_711004",
+        "pattern": "%ASA-%{INT}-711004: Task ran for %{NONNEGINT:service_duration} msec, Process = %{NU_DATA_ALL_BUT_COMMA:vendor_process_name}, PC = %{NU_DATA_ALL_BUT_COMMA:source_id}, Call stack ="
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "1c521cac-86c4-4a45-b5bf-825f25bdea67",
+      "data": {
+        "name": "NU_ASA_VPN_113028",
+        "pattern": "%ASA-7-113028: Extraction of username from VPN client certificate has %{NU_DATA_ALL_BUT_DOT:vendor_event_outcome}.  \\[Request %{NONNEGINT:event_code}\\]"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ee271f16-1366-4924-a554-c994dff694f0",
+      "data": {
+        "name": "NU_ASA_VPN_302021",
+        "pattern": "%ASA-%{INT}-302021: Teardown ICMP connection for faddr %{IP:source_nat_ip}/%{NONNEGINT:source_nat_port}(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? gaddr %{IP:destination_nat_ip}/%{NONNEGINT:destination_nat_port} laddr %{IP:host_nat_ip}/%{NONNEGINT:host_nat_port}( \\(%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? type %{NONNEGINT:network_icmp_type} code %{NONNEGINT:network_icmp_code}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ff784c8f-8a7a-4bd6-ba34-8ef452e61785",
+      "data": {
+        "name": "NU_ASA_BASE",
+        "pattern": "%{NU_DATA_ALL_BUT_PERCENT:asa_prefix}%%{WORD:vendor_syslog_facility}-%{INT:vendor_syslog_level}-%{NONNEGINT:vendor_syslog_id}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "705988a9-ea9a-4002-90cc-a1fc4fb63c0e",
+      "data": {
+        "name": "NU_ASA_VPN_722013",
+        "pattern": "%ASA-%{INT}-722013: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> SVC Message: 17/INFO: %{NU_DATA_ALL_BUT_DOT:vendor_event_outcome}.."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4263a1ed-6635-4d86-9cc6-caa073390bbd",
+      "data": {
+        "name": "NU_ASA_VPN_737006",
+        "pattern": "%ASA-%{INT}-737006: IPAA: Session=%{WORD:session_id}, Local pool request succeeded for tunnel-group '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:policy_name}'"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "e2060481-9e28-4de8-a7e9-fffc9a70f32e",
+      "data": {
+        "name": "NU_ASA_VPN_106020",
+        "pattern": "%ASA-%{INT}-106020: Deny IP teardrop fragment \\(size = %{NONNEGINT:size}, offset = %{NONNEGINT:offset}\\) from %{IP:source_ip} to %{IP:destination_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "72abf4ce-302d-4b69-bc65-60101d459017",
+      "data": {
+        "name": "NU_ASA_VPN_402123",
+        "pattern": "%ASA-%{INT}-402123: CRYPTO: The ASA hardware accelerator encountered an error \\(Invalid PKCS Type, Pad, or Length, code= %{NU_DATA_ALL_BUT_CLOSED_BRACKET:event_error_code}\\) while executing the command %{GREEDYDATA:vendor_system_command}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "99c34792-662d-4909-ae8d-e5d8c591ab89",
+      "data": {
+        "name": "NU_ASA_VPN_722037",
+        "pattern": "%ASA-%{INT}-722037: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> SVC closing connection: %{GREEDYDATA:vendor_event_outcome_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2581be09-4952-4f35-9c67-ee1a839a5f4e",
+      "data": {
+        "name": "NU_ASA_VPN_317079",
+        "pattern": "%ASA-%{INT}-317079: Added %{NU_DATA_ALL_BUT_SPACE:protocol} route %{IP:destination_ip}/%{NU_DATA_ALL_BUT_SPACE:network_masklength}(?: \\[[0-9]+/[0-9]+\\])? via %{NU_DATA_ALL_BUT_SPACE:network_interface_out} tableid \\[%{NU_DATA_ALL_BUT_CLOSED_CORNERED_BRACKET:tableid}\\]"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "58376b56-ec31-4535-87e6-514fdb04ef5d",
+      "data": {
+        "name": "NU_ASA_VPN_721018",
+        "pattern": "%ASA-%{INT}-721018: \\(WebVPN-(Secondary|Primary)\\) WebVPN session for client user %{NU_DATA_ALL_BUT_COMMA:user_name}, %{WORD} %{IP:source_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ea1270e6-7d08-429f-bacb-0874e08d63e3",
+      "data": {
+        "name": "NU_ASA_VPN_734001",
+        "pattern": "%ASA-%{INT}-734001: DAP: User %{NU_DATA_ALL_BUT_COMMA:user_name}, Addr %{IP:source_ip}, Connection %{NU_DATA_ALL_BUT_COLON:network_transport}: The following DAP records were selected for this connection: %{GREEDYDATA:vendor_event_outcome}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "cbf7047d-62fb-497f-94ef-e64860232c9d",
+      "data": {
+        "name": "NU_ASA_VPN_737017",
+        "pattern": "%ASA-%{INT}-737017: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, DHCP request attempt %{NONNEGINT:network_protocol_request_attempt} succeeded"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6fe661c7-5ca1-41d1-be11-a63bb464c2c5",
+      "data": {
+        "name": "NU_ASA_VPN_302015",
+        "pattern": "%ASA-%{INT}-302015: Built %{NU_DATA_ALL_BUT_SPACE:network_direction} UDP connection %{NONNEGINT} for %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} \\(%{IP}/%{NONNEGINT}\\)(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\(%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name})\\))? to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0de64237-5dd6-4b03-b68b-ca9141ea5fea",
+      "data": {
+        "name": "NU_ASA_VPN_500004",
+        "pattern": "%ASA-%{INT}-500004: Invalid transport field for protocol=%{NU_DATA_ALL_BUT_COMMA:network_transport}, from %{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "49b82362-1c19-4362-a4f4-d239370bfcc1",
+      "data": {
+        "name": "NU_ASA_VPN_400011",
+        "pattern": "%ASA-%{INT}-400011: IDS:2001 ICMP unreachable from %{IP:source_ip} to %{IP:destination_ip} on interface %{GREEDYDATA:network_interface_out}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "43175b10-d43c-42f5-a594-ee32678af90a",
+      "data": {
+        "name": "NU_ASA_VPN_722022",
+        "pattern": "%ASA-%{INT}-722022: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> %{NU_DATA_ALL_BUT_SPACE:network_transport} SVC connection established without compression"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a4140be8-6337-4284-bdf1-0dd0a3cfe8e3",
+      "data": {
+        "name": "NU_ASA_VPN_303002",
+        "pattern": "%ASA-%{INT}-303002: FTP connection from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{NU_DATA_ALL_BUT_COMMA:destination_hostname}, user %{NU_DATA_ALL_BUT_SPACE:user_name} (Stored|Retrieved) file %{GREEDYDATA:file_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2d45f98c-346f-4875-9664-c9169468845e",
+      "data": {
+        "name": "NU_ASA_VPN_737026",
+        "pattern": "%ASA-%{INT}-737026: IPAA: Session=%{WORD:session_id}, Client assigned %{IP:source_ip} from local pool %{HOSTNAME:vendor_dhcp_pool_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "1684bfba-1cd9-4251-9e53-641a8688b16b",
+      "data": {
+        "name": "NU_ASA_VPN_717037",
+        "pattern": "%ASA-%{INT}-717037: Tunnel group search using certificate maps failed for peer certificate: serial number: %{NU_DATA_ALL_BUT_COMMA:source_id}, subject name: CN=%{NU_DATA_ALL_BUT_COMMA:user_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "90e6cb69-0073-4ad3-a0bf-bedd1944804f",
+      "data": {
+        "name": "NU_ASA_VPN_313005",
+        "pattern": "%ASA-%{INT}-313005: No matching connection for ICMP error message: icmp src %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? dst %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? \\(type %{NONNEGINT:network_icmp_code}, code %{NONNEGINT:icmp_code}\\) on %{NU_DATA_ALL_BUT_DOT} interface.  Original IP payload: %{NU_DATA_ALL_BUT_SPACE:network_transport} src %{IP}(/%{NONNEGINT:source_port})? dst %{IP}(/%{NONNEGINT:destination_port})?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4383b58e-fc6a-40b2-81d7-3efe4c170561",
+      "data": {
+        "name": "NU_ASA_VPN_402119",
+        "pattern": "%ASA-4-402119: IPSEC: Received an %{NU_DATA_ALL_BUT_SPACE:protocol} packet \\(SPI= %{NU_DATA_ALL_BUT_COMMA:network_security_parameter_index}, sequence number= %{NU_DATA_ALL_BUT_CLOSED_BRACKET:network_sequence_number}\\) from %{IP:source_ip} \\(user= %{IP}\\) to %{IP:destination_ip} that failed anti-replay checking."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "69a9d801-8cbd-4869-8e65-d25de803b2ba",
+      "data": {
+        "name": "NU_ASA_VPN_507003",
+        "pattern": "%ASA-%{INT}-507003: tcp flow from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port} terminated by inspection engine, reason - inspector drop reset."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f9a7679f-7aad-4aa6-95b6-28991c130458",
+      "data": {
+        "name": "NU_ASA_VPN_113008",
+        "pattern": "%ASA-%{INT}-113008: AAA transaction status ACCEPT : user = %{GREEDYDATA:user_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d9c70475-c57a-460a-984b-669996a5294a",
+      "data": {
+        "name": "NU_ASA_VPN_313009",
+        "pattern": "%ASA-%{INT}-313009: Denied invalid ICMP code %{NONNEGINT:network_icmp_type}, for %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} \\(%{IP}/%{NONNEGINT}\\) to identity:%{IP:destination_ip}/%{NONNEGINT:destination_port} \\(%{IP}/%{NONNEGINT}\\), ICMP id %{NONNEGINT:icmp_id}, ICMP type %{NONNEGINT:icmp_type}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2c66f6b4-6e38-467e-bc5d-f72283965404",
+      "data": {
+        "name": "NU_ASA_VPN_302020",
+        "pattern": "%ASA-%{INT}-302020: Built %{NU_DATA_ALL_BUT_SPACE:network_direction} ICMP connection for faddr %{IP:source_nat_ip}/%{NONNEGINT:source_nat_port}(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? gaddr %{IP:destination_nat_ip}/%{NONNEGINT:destination_nat_port} laddr %{IP:host_nat_ip}/%{NONNEGINT:source_nat_port}( \\(%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? type %{NONNEGINT:network_icmp_type} code %{NONNEGINT:network_icmp_code}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "383dd9cd-a1f4-42f1-afc0-9be2cafcd689",
+      "data": {
+        "name": "NU_ASA_VPN_722036",
+        "pattern": "%ASA-%{INT}-722036: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> Transmitting large packet %{NONNEGINT:source_bytes_sent} \\(threshold %{NONNEGINT}\\)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "35f6c9d8-188a-47ec-9502-4aa8fca3662f",
+      "data": {
+        "name": "NU_ASA_VPN_750006",
+        "pattern": "%ASA-%{INT}-750006: Local:%{IP:destination_ip}:%{NONNEGINT:destination_port} Remote:%{IP:source_ip}:%{NONNEGINT:source_port} Username:%{IP:source_ip} IKEv2 SA UP. Reason: %{GREEDYDATA:vendor_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "fd6ae80e-62d2-417f-bc00-f28626aa30a6",
+      "data": {
+        "name": "NU_ASA_VPN_606001",
+        "pattern": "%ASA-%{INT}-606001: ASDM session number %{NONNEGINT:session_id} from %{IP:source_ip} started"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f18b8aaf-9a4c-48e9-b41c-64e6bfc60e8f",
+      "data": {
+        "name": "NU_ASA_VPN_713903",
+        "pattern": "%ASA-%{INT}-713903: IKE Receiver: Runt ISAKMP packet discarded on Port %{NONNEGINT:destination_port} from %{IP:source_ip}:%{NONNEGINT:source_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "8969f767-0c4a-488b-9cf7-f3a9aa085260",
+      "data": {
+        "name": "NU_ASA_VPN_106021",
+        "pattern": "%ASA-%{INT}-106021: Deny UDP reverse path check from %{IP:source_ip} to %{IP:destination_ip} on interface %{GREEDYDATA:network_interface_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "88f64e9e-229f-4030-bb07-4c23eda85c7c",
+      "data": {
+        "name": "NU_ASA_VPN_302014",
+        "pattern": "%ASA-%{INT}-302014: Teardown TCP connection %{NONNEGINT:session_id} for %{NU_DATA_ALL_BUT_COLON:network_interface_in}:(%{IP:source_ip}|%{NU_DATA_ALL_BUT_SLASH:source_hostname})/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:(%{IP:destination_ip}|%{NU_DATA_ALL_BUT_SLASH:destination_hostname})/%{NONNEGINT:destination_port} duration %{TIME:network_connection_duration} bytes %{NONNEGINT:network_bytes}%{GREEDYDATA:vendor_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6da476c5-5923-430d-8a9e-a1186ada64c7",
+      "data": {
+        "name": "NU_ASA_VPN_720042",
+        "pattern": "%ASA-%{INT}-720042: \\(%{NU_DATA_ALL_BUT_OPEN_BRACKET:vendor_unit}\\) Receiving (Create |Delete |New |Update )?(WebVPN Session( message)?|DHCP Lease message|SVC Addr Data message|DACL message)? (user %{NU_DATA_ALL_BUT_COMMA:user_name}, IP %{IP:source_ip}|(Mgr Data message |Sync STRAP Public Key message )?Session Index %{NONNEGINT:session_id}|\\(server %{IP:destination_ip}, request %{IP:vendor_request_ip}, assigned %{IP:source_ip}|\\(dhcp handle %{NU_DATA_ALL_BUT_CLOSED_BRACKET:network_protocol_hex_id})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "90613d6e-c746-48f9-961e-8a44b4a0e6de",
+      "data": {
+        "name": "NU_ASA_VPN_302016",
+        "pattern": "%ASA-%{INT}-302016: Teardown UDP connection %{NONNEGINT:session_id} for %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port}(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port}(\\(%{NU_DATA_ALL_BUT_BACKSLASH:destination_user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:destination_user_name}\\))? duration %{TIME:network_connection_duration} bytes %{NONNEGINT:network_bytes}( \\(%{NU_DATA_ALL_BUT_CLOSED_BRACKET}\\))?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f5e3e439-134f-417b-a535-e5cf7e642936",
+      "data": {
+        "name": "NU_ASA_VPN_737035",
+        "pattern": "%ASA-%{INT}-737035: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:vendor_event_outcome_reason}' message queued"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "5a645a2c-08c2-4b30-b9bc-50989f866715",
+      "data": {
+        "name": "NU_ASA_VPN_315011",
+        "pattern": "%ASA-%{INT}-315011: SSH session from %{IP:source_ip} on interface %{NU_DATA_ALL_BUT_COMMA:network_interface_out} for user \"%{NU_DATA_ALL_BUT_QUOTES:user_name}\" (disconnected by SSH server, reason: \"%{NU_DATA_ALL_BUT_QUOTES:event_error_description}\" \\(%{NU_DATA_ALL_BUT_CLOSED_BRACKET:event_error_code}\\)|terminated normally)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "318ce443-577b-472c-b6b4-5983d8e758e9",
+      "data": {
+        "name": "NU_ASA_VPN_725016",
+        "pattern": "%ASA-%{INT}-725016: Device selects trust-point (%{NU_DATA_ALL_BUT_SPACE:vendor_trust_point})? for client %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "29c2de16-e673-4f7c-9797-54b2af8f649f",
+      "data": {
+        "name": "NU_ASA_VPN_405001",
+        "pattern": "%ASA-%{INT}-405001: Received ARP request collision from %{IP:source_ip}/%{MAC:source_mac} on interface %{NU_DATA_ALL_BUT_DOT:network_interface_in} with existing ARP entry %{IP}/%{MAC:source_original_mac}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "db994499-8900-4323-be20-12158aafdaae",
+      "data": {
+        "name": "NU_ASA_VPN_717028",
+        "pattern": "%ASA-%{INT}-717028: Certificate chain was successfully validated with warning,%{GREEDYDATA:warning}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0befeb0a-93fc-48e3-b487-ad8fe836267a",
+      "data": {
+        "name": "NU_ASA_VPN_305012",
+        "pattern": "%ASA-%{INT}-305012: Teardown %{NU_DATA_ALL_BUT_SPACE} %{NU_DATA_ALL_BUT_SPACE:network_transport} translation from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NU_DATA_ALL_BUT_SPACE:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NU_DATA_ALL_BUT_SPACE:destination_port} duration %{TIME:network_connection_duration}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a376dd7c-689d-42dd-be1a-9471d905da2e",
+      "data": {
+        "name": "NU_ASA_VPN_113026",
+        "pattern": "%ASA-%{INT}-113026: Error <%{NU_DATA_ALL_BUT_GREATER_THAN:event_error_description}> while executing Lua script for group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}>"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f028e16b-9f74-47dd-8042-29209f6e95e7",
+      "data": {
+        "name": "NU_ASA_VPN_111008",
+        "pattern": "%ASA-%{INT}-111008: User '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:user_name}' executed the '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:command_line}' command."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "5f9aba3a-dce1-4cb8-be57-1284be3d792a",
+      "data": {
+        "name": "NU_ASA_VPN_716058",
+        "pattern": "%ASA-%{INT}-716058: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> AnyConnect session lost connection. Waiting to resume."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ebbfa54b-0660-4bc1-ac48-18e3ea45d674",
+      "data": {
+        "name": "NU_ASA_VPN_722032",
+        "pattern": "%ASA-%{INT}-722032: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> New %{NU_DATA_ALL_BUT_SPACE:network_transport} SVC connection replacing old connection."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "b0f4f48f-616c-49aa-9bf1-d54566c9fd34",
+      "data": {
+        "name": "NU_ASA_VPN_113004",
+        "pattern": "%ASA-%{INT}-113004: AAA user %{NU_DATA_ALL_BUT_SPACE:vendor_aaa_type} Successful : server =  %{IP:destination_ip} : user = %{GREEDYDATA:user_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a7b18129-1708-4a68-a622-1bca31045adf",
+      "data": {
+        "name": "NU_ASA_VPN_212005",
+        "pattern": "%ASA-%{INT}-212005: incoming SNMP request \\(%{NONNEGINT:source_bytes_sent} bytes\\) from <buffer is too small> exceeds data buffer size, discarding this SNMP request."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "cd376fdd-12c3-40ee-92c9-ae5d1e07083f",
+      "data": {
+        "name": "NU_ASA_VPN_776001",
+        "pattern": "%ASA-%{INT}-776001: CTS SXP: Configured source IP %{IP:source_ip} does not match outbound interface IP address."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ee0814ef-6e4f-48c6-885e-8a9032befa1b",
+      "data": {
+        "name": "NU_ASA_VPN_113014",
+        "pattern": "%ASA-%{INT}-113014: AAA authentication server not accessible : server =  %{IP:destination_ip} : user = %{GREEDYDATA:user_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "7e4a167a-3b4e-4c3e-98f3-3f036c14e0a4",
+      "data": {
+        "name": "NU_ASA_VPN_722056",
+        "pattern": "%ASA-%{INT}-722056: Unsupported AnyConnect client connection rejected from %{IP:source_ip}. Client Info: %{NU_DATA_ALL_BUT_DOT:source_user_agent}. Reason: %{GREEDYDATA:vendor_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "181778e2-7736-4b92-bb05-6395106e021b",
+      "data": {
+        "name": "NU_ASA_VPN_750007",
+        "pattern": "%ASA-%{INT}-750007: Local:%{IP:destination_ip}:%{NONNEGINT:destination_port} Remote:%{IP:source_ip}:%{NONNEGINT:source_port} Username:%{IP:source_ip} IKEv2 SA DOWN. Reason: %{GREEDYDATA:vendor_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4906fcc3-ea33-4202-852e-b557f52deb52",
+      "data": {
+        "name": "NU_ASA_VPN_737001",
+        "pattern": "%ASA-%{INT}-737001: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, Received message '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:vendor_event_outcome_reason}'"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "740c1f7a-73b4-4fa1-a7fb-636e507d395c",
+      "data": {
+        "name": "NU_ASA_VPN_750003",
+        "pattern": "%ASA-%{INT}-750003: Local:%{IP:destination_ip}:%{NONNEGINT:destination_port} Remote:%{IP:source_ip}:%{NONNEGINT:source_port} Username:%{IP:source_ip} IKEv2 Negotiation aborted due to ERROR: %{GREEDYDATA:vendor_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3e675065-5090-4c0e-80b1-9bd1245fe0c8",
+      "data": {
+        "name": "NU_ASA_VPN_111004",
+        "pattern": "%ASA-%{INT}-111004: (%{IP:source_ip}|console) end configuration: OK"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "33300e0a-aff8-4304-9695-5ef7f69bf763",
+      "data": {
+        "name": "NU_ASA_VPN_737013",
+        "pattern": "%ASA-%{INT}-737013: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, Error freeing address %{IP:source_ip}, not found"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "9d63cb1b-3343-4fdd-be2f-c2a47defec01",
+      "data": {
+        "name": "NU_ASA_VPN_113034",
+        "pattern": "%ASA-%{INT}-113034: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> User ACL <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_acl_name}> from AAA ignored, AV-PAIR ACL used instead."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2ae2a80e-b2c6-4594-8ad4-a8742dcc3a7e",
+      "data": {
+        "name": "NU_ASA_VPN_725003",
+        "pattern": "%ASA-%{INT}-725003: SSL client %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "62004a19-d79c-497a-9d4a-1430bd3b986f",
+      "data": {
+        "name": "NU_ASA_VPN_113024",
+        "pattern": "%ASA-%{INT}-113024: Group %{NU_DATA_ALL_BUT_COLON:policy_name}: Authenticating ssl-client connection from %{IP:source_ip} with username, %{NU_DATA_ALL_BUT_COMMA:user_name}, from client certificate"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "81651353-82e8-49c4-97b2-b2cf3749c845",
+      "data": {
+        "name": "NU_ASA_VPN_722055",
+        "pattern": "%ASA-%{INT}-722055: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> Client Type: ((Cisco AnyConnect VPN Agent for %{NU_DATA_ALL_BUT_INTEGERS:source_os_name} %{NU_VERSION_NUMBER:vendor_service_version})|(Open AnyConnect VPN Agent v%{NU_VERSION_NUMBER_2:vendor_service_version}(%{NU_DATA_ALL_BUT_SPACE:source_os_name})?))"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a1d0abf0-2a09-460d-bae3-86dafa4e4b81",
+      "data": {
+        "name": "NU_ASA_VPN_725012",
+        "pattern": "%ASA-%{INT}-725012: Device chooses cipher %{NU_DATA_ALL_BUT_SPACE:certificate_cipher} for the SSL session with client %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "8a426f73-f4a2-4186-822b-79aebeb7ff63",
+      "data": {
+        "name": "NU_ASA_VPN_737015",
+        "pattern": "%ASA-%{INT}-737015: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, Freeing DHCP address %{IP:source_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2e39ee93-6bb7-4113-ac0f-f3b162de7ed0",
+      "data": {
+        "name": "NU_ASA_VPN_113044",
+        "pattern": "%ASA-6-113044: Client <%{IP:source_ip}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> requested tunnel protocol \\(%{NU_DATA_ALL_BUT_CLOSED_BRACKET:network_protocol}\\) not allowed by group-policy <%{NU_DATA_ALL_BUT_GREATER_THAN:vpn_group}>"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0f33a050-bcd2-4b81-a9e0-8b6d0a3ed99c",
+      "data": {
+        "name": "NU_ASA_VPN_410001",
+        "pattern": "%ASA-%{INT}-410001: Dropped UDP DNS request from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port}; label length %{NONNEGINT:label_length} bytes exceeds protocol limit of %{INT} bytes"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "dd087123-bc55-4c60-94ca-0e795effe875",
+      "data": {
+        "name": "NU_ASA_VPN_502103",
+        "pattern": "%ASA-%{INT}-502103: User priv level changed: Uname: %{NU_DATA_ALL_BUT_SPACE:user_name} From: %{NONNEGINT:vendor_priv_level_from} To: %{NONNEGINT:vendor_priv_level_to}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ffc684b5-9a1c-49f4-b254-8750a55c55ba",
+      "data": {
+        "name": "NU_ASA_VPN_400014",
+        "pattern": "%ASA-%{INT}-400014: IDS:2004 ICMP echo request from %{IP:source_ip} to %{IP:destination_ip} on interface %{NU_DATA_ALL_BUT_COLON:network_interface_in}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d610eeb9-d097-4ebf-b209-b999d6d1b8c2",
+      "data": {
+        "name": "NU_ASA_VPN_737005",
+        "pattern": "%ASA-%{INT}-737005: IPAA: Session=%{NU_DATA_ALL_BUT_COMMA:session_id}, DHCP configured, request succeeded for tunnel-group '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:policy_name}'"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "5baef8ff-63c2-43f1-80fe-005d09707629",
+      "data": {
+        "name": "NU_ASA_VPN_606003",
+        "pattern": "%ASA-%{INT}-606003: ASDM logging session number %{NONNEGINT:session_id} from %{IP:source_ip} started"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "91ab75b0-104e-4d3a-8de2-59876c0b6649",
+      "data": {
+        "name": "NU_ASA_VPN_717016",
+        "pattern": "%ASA-%{INT}-717016: Removing expired CRL from the CRL cache.  Issuer: (cn|CN)=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_common_name},(ou|OU)=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_organizational_unit},(o|O)=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_organization},(c|C)=%{NU_DATA_ALL_BUT_COMMA:certificate_issuer_locality}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4895550c-ed22-441f-96c0-08e028a461a8",
+      "data": {
+        "name": "NU_ASA_VPN_609002",
+        "pattern": "%ASA-%{INT}-609002: Teardown local-host %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip} duration %{TIME:network_connection_duration}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2bb7f46f-1f54-4cf1-8175-58eae822c11f",
+      "data": {
+        "name": "NU_ASA_VPN_722023",
+        "pattern": "%ASA-%{INT}-722023: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> %{NU_DATA_ALL_BUT_SPACE:network_transport} SVC connection terminated without compression"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "994bd227-5802-4448-8649-3a7c24e9bc59",
+      "data": {
+        "name": "NU_ASA_VPN_305006",
+        "pattern": "%ASA-%{INT}-305006: %{NU_DATA_ALL_BUT_SPACE:type} translation creation failed for %{NU_DATA_ALL_BUT_SPACE:protocol} src %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip} dst %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip} %{NU_DATA_ALL_BUT_COLON:protocol_header}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3103553c-7ba7-418d-a706-83c43cc5e5e4",
+      "data": {
+        "name": "NU_ASA_VPN_414003",
+        "pattern": "%ASA-%{INT}-414003: TCP Syslog Server %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port} not responding, New connections are %{NU_DATA_ALL_BUT_SPACE:vendor_event_outcome} based on logging permit-hostdown policy"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f270c7ed-ab2f-4c59-9018-440b5563c4ed",
+      "data": {
+        "name": "NU_ASA_VPN_716038",
+        "pattern": "%ASA-%{INT}-716038: Group <(%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name})?> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> Authentication: successful, Session Type: %{GREEDYDATA:service_name}."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4048203e-edc6-4029-9d63-85f155c521aa",
+      "data": {
+        "name": "NU_ASA_VPN_111010",
+        "pattern": "%ASA-%{INT}-111010: User '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:user_name}', running '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:command_line}' from IP %{IP:source_ip}, executed '%{NU_DATA_ALL_BUT_SINGLE_QUOTES:command_line}'"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "7001840f-0b3d-4085-b5aa-ee965b7e578f",
+      "data": {
+        "name": "NU_ASA_VPN_106001",
+        "pattern": "%ASA-%{INT}-106001: Inbound TCP connection denied from %{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} flags %{NU_DATA_ALL_BUT_O:tcp_flags} on interface %{GREEDYDATA:network_interface_in}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d3f1b59c-e311-49b2-b4e5-9dc21b21d9cf",
+      "data": {
+        "name": "NU_ASA_VPN_113015",
+        "pattern": "%ASA-%{INT}-113015: AAA user authentication Rejected : reason = %{NU_DATA_ALL_BUT_COLON:vendor_reason} : local database : user = %{NU_DATA_ALL_BUT_COLON:user_name} : user IP = %{IP:source_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ae479724-c85f-42a7-9dc7-f76d2d960c25",
+      "data": {
+        "name": "NU_ASA_VPN_406002",
+        "pattern": "%ASA-%{INT}-406002: FTP port command different address: %{IP:source_ip}\\(%{IP:source_nat_ip}\\) to %{IP:destination_ip} on interface %{GREEDYDATA:network_interface_out}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d5098634-5192-4a91-8523-da5f3ef425f2",
+      "data": {
+        "name": "NU_ASA_VPN_106015",
+        "pattern": "%ASA-%{INT}-106015: Deny TCP \\(no connection\\) from (%{IP:source_ip}|%{NU_DATA_ALL_BUT_SLASH:source_hostname})/%{NONNEGINT:source_port} to (%{IP:destination_ip}|%{NU_DATA_ALL_BUT_SLASH:destination_hostname})/%{NONNEGINT:destination_port} flags %{NU_DATA_ALL_BUT_O:tcp_flags}  on interface %{NU_DATA_ALL_BUT_COLON:network_interface_out}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4b0a6a70-f412-49b6-a1eb-80d358198c86",
+      "data": {
+        "name": "NU_ASA_VPN_725004",
+        "pattern": "%ASA-%{INT}-725004: Device requesting certificate from SSL client %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} for authentication"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "pipeline_rule",
+        "version": "1"
+      },
+      "id": "d7bb8745-4484-408c-b72e-840b910c0008",
+      "data": {
+        "title": {
+          "@type": "string",
+          "@value": "ASA_Prefix_source"
+        },
+        "description": {
+          "@type": "string",
+          "@value": ""
+        },
+        "source": {
+          "@type": "string",
+          "@value": "rule \"ASA_Prefix_source\"\nwhen \nhas_field(\"asa_prefix\")\nthen\n    //set_field(\"source\",split(\" \",to_string($message.asa_prefix))[0]);\n    \n    set_fields(\n        to_map(\n            grok(\n                pattern: \"%{ASA_Prefix_parse}\",\n                value: to_string($message.asa_prefix),\n                only_named_captures:true\n            )\n        )\n    );\nend\n"
+        }
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "be578e26-bab8-4355-8c53-a3feea43f875",
+      "data": {
+        "name": "NU_ASA_VPN_776202",
+        "pattern": "%ASA-%{INT}-776202: CTS Env: PAC for Server <%{IP:destination_ip}>, A-ID <Identity Services Engine> has expired"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "9eaaef90-8d00-4b09-9197-49dbf51d729d",
+      "data": {
+        "name": "NU_ASA_VPN_113005",
+        "pattern": "%ASA-%{INT}-113005: AAA user authentication Rejected : reason = %{NU_DATA_ALL_BUT_COLON:vendor_event_outcome_reason} : server = %{IP:source_ip} : user = %{NU_DATA_ALL_BUT_COLON:user_name} : user IP = %{IP:destination_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3dce8820-524c-4a0b-9925-9eb632757215",
+      "data": {
+        "name": "NU_ASA_VPN_305011",
+        "pattern": "%ASA-%{INT}-305011: Built %{NU_DATA_ALL_BUT_SPACE:connection_type} %{NU_DATA_ALL_BUT_SPACE:protocol} translation from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NU_DATA_ALL_BUT_SPACE:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NU_DATA_ALL_BUT_SPACE:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "e36a0505-5be8-42a3-8b27-eab9eadc0c95",
+      "data": {
+        "name": "NU_ASA_VPN_725002",
+        "pattern": "%ASA-%{INT}-725002: Device completed SSL handshake with client %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} for %{NU_DATA_ALL_BUT_SPACE:network_protocol} session"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "478f2e00-1e69-4d06-bb8c-6bcdaac55c2d",
+      "data": {
+        "name": "NU_ASA_VPN_720041",
+        "pattern": "%ASA-%{INT}-720041: \\(%{NU_DATA_ALL_BUT_OPEN_BRACKET:vendor_unit}\\) Sending (Create |Delete |New |Update )?(WebVPN Session( message)?|DHCP Lease message|SVC Addr Data message|DACL message)? ((Mgr Data message |Sync STRAP Public Key message )?Session Index %{NONNEGINT:session_id}|user , IP %{IP:source_ip}|\\(server %{IP:destination_ip}, request %{IP:vendor_request_ip}, assigned %{IP:source_ip}|\\(dhcp handle %{NU_DATA_ALL_BUT_CLOSED_BRACKET:network_protocol_hex_id}|dACL: %{NU_DATA_ALL_BUT_SPACE:vendor_access_list})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "dd96b76f-c35a-4917-8dbb-34aa269c6bfe",
+      "data": {
+        "name": "NU_ASA_VPN_111007",
+        "pattern": "%ASA-%{INT}-111007: Begin configuration: (%{IP:source_ip}|console) reading from (%{NU_DATA_ALL_BUT_SPACE:service_name}( \\[%{WORD:http_method}\\])?)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "80898cf3-54f5-44ff-9e90-3c26cee4c58c",
+      "data": {
+        "name": "NU_ASA_VPN_113012",
+        "pattern": "%ASA-%{INT}-113012: AAA user authentication Successful : local database : user = %{NU_DATA_ALL_BUT_SPACE:user_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "44a133ec-fb78-4150-946c-4c33c0cd71d2",
+      "data": {
+        "name": "NU_ASA_VPN_722041",
+        "pattern": "%ASA-%{INT}-722041: TunnelGroup <%{NU_DATA_ALL_BUT_GREATER_THAN:vendor_tunnel_group}> GroupPolicy <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> No IPv6 address available for SVC connection"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0f9e503e-aa5b-4bea-962c-ebe453ea6306",
+      "data": {
+        "name": "NU_ASA_VPN_722043",
+        "pattern": "%ASA-%{INT}-722043: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:policy_name}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> DTLS disabled: unable to negotiate cipher"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4888ca65-a552-41b6-a3a6-0f16380f4f7f",
+      "data": {
+        "name": "NU_ASA_VPN_106014",
+        "pattern": "%ASA-%{INT}-106014: Deny inbound icmp src %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}(\\(%{NU_DATA_ALL_BUT_BACKSLASH:user_domain}\\\\%{NU_DATA_ALL_BUT_CLOSED_BRACKET:user_name}\\))? dst %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "806f3519-641c-4ccb-bad9-c8d94c7d1ab6",
+      "data": {
+        "name": "NU_ASA_VPN_722010",
+        "pattern": "%ASA-%{INT}-722010: Group <%{NU_DATA_ALL_BUT_GREATER_THAN:vpn_group}> User <%{NU_DATA_ALL_BUT_GREATER_THAN:user_name}> IP <%{IP:source_ip}> SVC Message: 16/ERROR: %{NU_DATA_ALL_BUT_DOT:vendor_event_outcome}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "80157bbc-408d-4689-b925-a1002b024e83",
+      "data": {
+        "name": "NU_ASA_VPN_113022",
+        "pattern": "%ASA-%{INT}-113022: AAA Marking %{NU_DATA_ALL_BUT_SPACE:service_name} server %{IP:destination_ip} in aaa-server group %{NU_DATA_ALL_BUT_SPACE:vendor_server_group} as FAILED"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a5c3ac97-7223-4e4b-95dc-b0003d9cc475",
+      "data": {
+        "name": "NU_ASA_VPN_113019",
+        "pattern": "%ASA-%{INT}-113019: Group = %{NU_DATA_ALL_BUT_COMMA:policy_name}, Username = %{NU_DATA_ALL_BUT_COMMA:user_name}, IP = %{IP:source_ip}, Session disconnected. Session Type: %{NU_DATA_ALL_BUT_COMMA:service_name}, Duration: %{NU_DATA_ALL_BUT_COMMA:vpn_session_duration}, Bytes xmt: %{NONNEGINT:vpn_session_xmt}, Bytes rcv: %{NONNEGINT:vpn_session_rcv}, Reason: %{GREEDYDATA:vendor_event_outcome_reason}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "541a8d92-c147-40e9-af07-51fdb11c94bd",
+      "data": {
+        "name": "NU_ASA_VPN_106012",
+        "pattern": "%ASA-%{INT}-106012: Deny IP from %{IP:source_ip} to %{IP:destination_ip}, IP options: \"%{NU_DATA_ALL_BUT_QUOTES:vendor_event_reason}\""
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4ed916cb-67d1-4cb3-a876-761b7701db1a",
+      "data": {
+        "name": "NU_ASA_VPN_110003",
+        "pattern": "%ASA-%{INT}-110003: Routing failed to locate next hop for %{NU_DATA_ALL_BUT_SPACE:network_transport} from %{NU_DATA_ALL_BUT_COLON:network_interface_in}:%{IP:source_ip}/%{NONNEGINT:source_port} to %{NU_DATA_ALL_BUT_COLON:network_interface_out}:%{IP:destination_ip}/%{NONNEGINT:destination_port}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6ac1ffe9-5d17-4262-9621-20afde449c07",
+      "data": {
+        "name": "NU_ASA_VPN_209006",
+        "pattern": "%ASA-%{INT}-209006: Fragment queue threshold exceeded, dropped UDP fragment from %{IP:source_ip}/%{NONNEGINT:source_port} to %{IP:destination_ip}/%{NONNEGINT:destination_port} on %{NU_DATA_ALL_BUT_DOT:network_interface_out} interface."
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "589501df-2760-4488-804a-52056fea6997",
+      "data": {
+        "name": "NU_ASA_VPN_611103",
+        "pattern": "%ASA-%{INT}-611103: User logged out: Uname: %{NU_DATA_ALL_BUT_SPACE:user_name}"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "9467a504-88f3-4bd0-9a88-f232aba3d21b",
+      "data": {
+        "name": "INT",
+        "pattern": "(?:[+-]?(?:[0-9]+))"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "f257056d-469d-44b0-86e7-21b40b97fad4",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_SPACE",
+        "pattern": "[^ ]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "1f739e7a-345e-4f2c-9e17-7d2d8c696df7",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_OPENED_CORNERED_BRACKET",
+        "pattern": "[^\\[]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "accf6965-fb99-4406-8d46-ff6e7d34f7f1",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_CLOSED_CORNERED_BRACKET",
+        "pattern": "[^]]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "1f3b9f16-ecdf-49bf-a6e3-e250947bcee7",
+      "data": {
+        "name": "IP",
+        "pattern": "(?:%{IPV6}|%{IPV4})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "01dea46d-973c-4f84-a73b-4f7e75152c47",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_COMMA",
+        "pattern": "[^,]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a1fc4341-f3c7-4df2-89d0-ae5e0c0505a5",
+      "data": {
+        "name": "NONNEGINT",
+        "pattern": "\\b(?:[0-9]+)\\b"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "2bd49b64-de26-4bae-93b6-5452ec5db848",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_APOSTROPHE",
+        "pattern": "[^']+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3f77098c-9ed7-4f04-83bc-514d087025ef",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_SLASH",
+        "pattern": "[^/]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "72a4f8af-2195-4e00-b0a9-3d45aa127005",
+      "data": {
+        "name": "WORD",
+        "pattern": "\\b\\w+\\b"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d5acd078-df01-408f-9d4a-14920e69e484",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_SINGLE_QUOTES",
+        "pattern": "[^']+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "fab65d5b-bc23-40a1-ad4b-c8a2aa7503a6",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_GREATER_THAN",
+        "pattern": "[^>]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "720b2b1f-c1ff-4df3-92c1-ac213da60e50",
+      "data": {
+        "name": "GREEDYDATA",
+        "pattern": ".*"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "286749f2-fecd-48ab-a9a9-711137b80699",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_COLON",
+        "pattern": "[^:]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3a344fa2-7206-49fa-b78b-50ef3488a174",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_CLOSED_BRACKET",
+        "pattern": "[^)]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "39406dbc-cfab-4e3e-80dc-4eb506d2cc7d",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_DOT",
+        "pattern": "[^.]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "11c82737-40ba-4d73-a888-1bee7380e85c",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_QUOTES",
+        "pattern": "[^\"]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "738f77c0-804d-4faf-b863-ad4b0093d378",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_BACKSLASH",
+        "pattern": "[^\\\\]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "33f4dc5b-aee8-41de-83ce-d41bc083e3aa",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_SEMICOLON",
+        "pattern": "[^;]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "0c516c75-3c59-4fb4-ac3b-c171097abb1e",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_PERCENT",
+        "pattern": "[^%]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "3d0ae3bd-6635-433f-b376-a04e02e70da4",
+      "data": {
+        "name": "HOSTNAME",
+        "pattern": "\\b(?:[0-9A-Za-z][0-9A-Za-z-]{0,100})(?:\\.(?:[0-9A-Za-z][0-9A-Za-z-]{0,100}))*(\\.?|\\b)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "4629509a-9d70-494d-8d00-0bef84568e72",
+      "data": {
+        "name": "TIME",
+        "pattern": "(?!<[0-9])%{HOUR}:%{MINUTE}(?::%{SECOND})(?![0-9])"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6079bd65-bd79-459d-8fef-7120e820b3b9",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_OPEN_BRACKET",
+        "pattern": "[^(]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "8b5bf365-fb36-4c1a-9925-f6c75f86395b",
+      "data": {
+        "name": "MAC",
+        "pattern": "(?:%{CISCOMAC}|%{WINDOWSMAC}|%{COMMONMAC})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "ae84c1b0-3eb4-4adb-9a29-73869d6deb05",
+      "data": {
+        "name": "NU_VERSION_NUMBER_2",
+        "pattern": "[\\d.-]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "dbf06776-35e3-44d2-8207-1891e7f12484",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_INTEGERS",
+        "pattern": "[^0123456789]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "151e9b4b-6992-4686-9799-8bf601319991",
+      "data": {
+        "name": "NU_VERSION_NUMBER",
+        "pattern": "[\\d.]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "64c0e56a-2905-45eb-8337-37369232b0dc",
+      "data": {
+        "name": "NU_DATA_ALL_BUT_O",
+        "pattern": "[^o]+"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "9df1f36a-cd23-49ab-a5d5-00b9e55e298f",
+      "data": {
+        "name": "IPV6",
+        "pattern": "((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(\\.(25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}))|:)))(%.+)?"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "a787ca05-f331-400e-8ab4-e2a424008016",
+      "data": {
+        "name": "IPV4",
+        "pattern": "(?<![0-9])(?:(?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5])[.](?:[0-1]?[0-9]{1,2}|2[0-4][0-9]|25[0-5]))(?![0-9])"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "e2fdf137-4f82-409b-9267-77d39e8ada59",
+      "data": {
+        "name": "HOUR",
+        "pattern": "(?:2[0123]|[01]?[0-9])"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "d1748457-5760-43ad-9d12-ac6540bb0855",
+      "data": {
+        "name": "MINUTE",
+        "pattern": "(?:[0-5][0-9])"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "727ad67d-33d4-40fb-9623-3d8365649c9e",
+      "data": {
+        "name": "SECOND",
+        "pattern": "(?:(?:[0-5]?[0-9]|60)(?:[:.,][0-9]+)?)"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "6b0205e0-63f5-4d84-9663-d45ad8a1ea00",
+      "data": {
+        "name": "WINDOWSMAC",
+        "pattern": "(?:(?:[A-Fa-f0-9]{2}-){5}[A-Fa-f0-9]{2})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "148979ff-de3b-4e1e-9831-a97abfd20f35",
+      "data": {
+        "name": "CISCOMAC",
+        "pattern": "(?:(?:[A-Fa-f0-9]{4}\\.){2}[A-Fa-f0-9]{4})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    },
+    {
+      "v": "1",
+      "type": {
+        "name": "grok_pattern",
+        "version": "1"
+      },
+      "id": "962c825e-440f-4f8a-a5cb-47612ba6ede5",
+      "data": {
+        "name": "COMMONMAC",
+        "pattern": "(?:(?:[A-Fa-f0-9]{2}:){5}[A-Fa-f0-9]{2})"
+      },
+      "constraints": [
+        {
+          "type": "server-version",
+          "version": ">=6.0.6+4aa664f"
+        }
+      ]
+    }
+  ]
+}
