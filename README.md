@@ -55,10 +55,10 @@ ElasticsearchException[Elasticsearch exception [type=mapper_parsing_exception, r
 
 OpenSearchException[OpenSearch exception [type=mapper_parsing_exception, reason=failed to parse field [winlog_event_data_param1] of type [date] in document with id 's0me-rand0m-iD-from-Graylog'. Preview of field's value: 'Windows Update']]; nested: OpenSearchException[OpenSearch exception [type=illegal_argument_exception, reason=failed to parse date field [Windows Update] with format [strict_date_optional_time||epoch_millis]]]; nested: OpenSearchException[OpenSearch exception [type=date_time_parse_exception, reason=Failed to parse with all enclosed parsers]];
 ```
-If you run into such errors, find the field with a value not fitting to the type of the field and build a rule similar to "ASA ssh-renaming"
+If you run into such errors, find the field with a value not fitting to the type of the field and build a rule similar to "Firewall_Cisco_ASA_ssh-renaming"
 
 ```
-rule "ASA ssh-renaming"
+rule "Firewall_Cisco_ASA_ssh-renaming"
 when
   has_field("destination_port") &&
   to_string($message.destination_port) == "ssh"
@@ -76,13 +76,13 @@ To install the content pack to on ```System/Content Packs``` and click on ```Upl
 
 ## Adding the Rules to the Pipeline
 To stay in the schema from above open the pipeline ```[proc] Normalization```. The processing will happen in those stages:
-1) Add here the rule named ```ASA_BASE``` in stage x. This rule shortens the logs by their header to make parsing more consistent across different setups and gets us the field ```vendor_syslog_id```, which is used as a condition for the rules in stage x+2. Here you will need to do an adjustment: add the ID of your Input, where Cisco ASA is ingested. This is important, otherwise the logs will not find their way into the parsing.
-2) in stage x+1 add the rule ```ASA_Prefix```. This will parse the prefix of your messages. Depending on the configuration of your Cisco ASA (rerouted via syslog-server, syslog config changes, ...) you will need to adjust things there to correctly parse the hostname from the syslog header correctly. 
-3) Add the rule named ```ASA_apply_grok``` to stage x+2 and add a rule like ```ASA_Prefix_source``` to parse the Syslog header.
-4) add the rules ```ASA https-renaming```and ```ASA ssh-renaming``` into stage x+3. Those will fix some inconsistencies in logging by Cisco ASA.
+1) Add here the rule named ```Firewall_Cisco_ASA_BASE``` in stage x. This rule shortens the logs by their header to make parsing more consistent across different setups and gets us the field ```vendor_syslog_id```, which is used as a condition for the rules in stage x+2. Here you will need to do an adjustment: add the ID of your Input, where Cisco ASA is ingested. This is important, otherwise the logs will not find their way into the parsing.
+2) in stage x+1 add the rule ```Firewall_Cisco_ASA_Prefix```. This will parse the prefix of your messages. Depending on the configuration of your Cisco ASA (rerouted via syslog-server, syslog config changes, ...) you will need to adjust things there to correctly parse the hostname from the syslog header correctly. 
+3) Add the rule named ```Firewall_Cisco_ASA_apply_grok``` to stage x+2 and add a rule like ```Firewall_Cisco_ASA_Prefix_source``` to parse the Syslog header.
+4) add the rules ```Firewall_Cisco_ASA_https-renaming```and ```Firewall_Cisco_ASA_ssh-renaming``` into stage x+3. Those will fix some inconsistencies in logging by Cisco ASA.
 
 ## monitor unpared logs
-To monitor unparsed logs, simply set ```log_missing``` to ```True``` in the ```ASA_apply_grok``` pipeline rule and look for entries in the Graylog log. 
+To monitor unparsed logs, simply set ```log_missing``` to ```True``` in the ```Firewall_Cisco_ASA_apply_grok``` pipeline rule and look for entries in the Graylog log. 
 
 
 # Use cases / Dashboards
